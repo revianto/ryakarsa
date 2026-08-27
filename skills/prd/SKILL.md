@@ -28,7 +28,7 @@ Classify the project to pick the question set (read `references/question-bank.md
 - internal tool
 - integration / API
 
-Use the **AskUserQuestion tool** when available (ZCode) — questions appear as pop-ups with clickable options, so the user answers by tapping, never by typing question numbers. **If the tool is not available** (e.g., running inside Claude Code or another client without AskUserQuestion), fall back to a numbered text list in a single message and tell the user they can answer with numbers like "3: a,c,f". Tool constraints below shape the interview when AskUserQuestion is used:
+Then ask the questions using the **AskUserQuestion tool** when available (ZCode) — questions appear as pop-ups with clickable options, so the user answers by tapping, never by typing question numbers. **If the tool is not available** (e.g., running inside Claude Code or another client without AskUserQuestion), fall back to a numbered text list in a single message and tell the user they can answer with numbers like "3: a,c,f". Tool constraints below shape the interview when AskUserQuestion is used:
 
 - **Max 4 questions per pop-up** → split a 5–8 question interview into **2–3 waves** (e.g., wave 1 = questions 1–4, wave 2 = questions 5–8).
 - **Max 4 options per question** → cap options at 4. If more candidates exist, keep the 4 strongest or split into a separate question. "Lainnya"/"Other" is added automatically by the tool — never add it manually.
