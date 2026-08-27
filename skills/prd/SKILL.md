@@ -1,6 +1,6 @@
 ---
 name: prd
-description: Turn a raw product idea into a mature PRD (Product Requirement Document) in three stages — a short interview (5–8 smart questions with pickable options), an editable feature/phase plan, then the final PRD.md. Use whenever the user wants to create, draft, plan, or improve a PRD, product requirements doc, product spec, or feature brief — including casual phrasings like "buat PRD", "bikin PRD", "tolong buatkan PRD-nya", "write a spec for this", "plan this app before we build it" — even when the word "PRD" is not said but structured product planning before development is clearly wanted.
+description: Turn a raw product idea into a mature PRD (Product Requirement Document) in three stages — a short interview (5–8 smart questions with pickable options), an editable feature/phase plan, then the final PRD.md. Use whenever the user wants to create, draft, or plan a NEW PRD, product requirements doc, product spec, or feature brief from a raw idea — including casual phrasings like "buat PRD", "bikin PRD", "tolong buatkan PRD-nya", "write a spec for this", "plan this app before we build it" — even when the word "PRD" is not said but structured product planning before development is clearly wanted. For cleaning up or restructuring an existing PRD, use the prd-refine skill instead.
 ---
 
 # PRD Writer
