@@ -1,6 +1,6 @@
 {
   "name": "ryakarsa",
-  "version": "1.0.0",
-  "description": "PRD writer — interview pop-up (AskUserQuestion), plan bertahap, dan PRD.md final",
+  "version": "1.1.0",
+  "description": "PRD toolkit — buat PRD baru dari ide (interview pop-up + plan bertahap) dan rapikan PRD lama (prd-refine) menjadi PRD.md final",
   "skills": "skills"
 }
