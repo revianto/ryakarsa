@@ -61,4 +61,5 @@ Close with a change summary of ≤8 lines: what moved where, what was sharpened,
 
 ## Handoff
 
-If the input turns out not to be a PRD at all — just a raw idea or scattered notes — stop and say so: the `prd` skill (interview → plan → PRD.md) is the right tool for creating one from scratch.
+- If the input turns out not to be a PRD at all — just a raw idea or scattered notes — stop and say so: the `prd` skill (interview → plan → PRD.md) is the right tool for creating one from scratch.
+- Once the refined PRD is written and any open questions are resolved, mention `prd-to-tasks` as the next step for turning it into an execution backlog + QA checklist — don't run it unasked.

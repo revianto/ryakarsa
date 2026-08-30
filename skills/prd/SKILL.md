@@ -95,3 +95,7 @@ Read `references/prd-template.md` and fill **every** section from the interview 
 - Phases, priorities, and stack come verbatim from the approved plan — do not re-decide them here.
 
 Write to `./PRD.md` in the working directory unless the user gave another path. Then confirm in ≤6 lines: file path, locked scope (phases + feature count), stack, top success metric, and how many open questions remain.
+
+## Handoff
+
+Once PRD.md is written: if it has open questions or vague spots the user wants tightened first, point to `prd-refine`. Once it's solid, the natural next step is `prd-to-tasks` to turn the approved phases into an execution backlog + QA checklist — mention it, don't run it unasked.
