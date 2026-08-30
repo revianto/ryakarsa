@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-`ryakarsa` is not an application — it's a Claude Code / ZCode **plugin** distributing a set of skills (Markdown instruction files with YAML frontmatter, plus reference docs). There is no build, lint, or test suite; "development" here means editing `SKILL.md` files and their `references/` docs, then syncing and publishing.
+`ryakarsa` is not an application — it's a **plugin/skill pack for Claude Code, ZCode, and Codex CLI**, distributing a set of skills (Markdown instruction files with YAML frontmatter, plus reference docs) in the open `SKILL.md` format (agentskills.io). There is no build, lint, or test suite; "development" here means editing `SKILL.md` files and their `references/` docs, then syncing and publishing.
 
 ## Source of truth vs. this repo
 
@@ -12,15 +12,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Correct workflow when changing a skill:
 1. Edit the skill under `~/.agents/skills/<skill-name>/`.
-2. Run `./scripts/sync-and-push.sh` — it rsyncs each skill in its `SKILLS` array from `~/.agents/skills/<skill>/` into `skills/<skill>/`, validates frontmatter, then commits and pushes if anything changed.
-3. If `~/.agents/skills/` isn't available in the current environment, edit `skills/` directly in the repo and remember to backport the same change to `~/.agents/skills/` before the next sync (otherwise it gets clobbered).
+2. Run `./scripts/sync-and-push.sh` — it rsyncs each skill in its `SKILLS` array from `~/.agents/skills/<skill>/` into `skills/<skill>/`, validates frontmatter, mirrors `skills/` into `.codex/skills/` (for Codex CLI's project-level auto-discovery), then commits and pushes if anything changed.
+3. If `~/.agents/skills/` isn't available in the current environment, edit `skills/` directly in the repo and remember to backport the same change to `~/.agents/skills/` before the next sync (otherwise it gets clobbered). `.codex/skills/` should never be hand-edited — it's always a mirror of `skills/`.
 
 When adding a brand-new skill, add its name to the `SKILLS=(...)` array in `scripts/sync-and-push.sh` too, or the sync script will silently skip it.
 
 ## Commands
 
 ```bash
-./scripts/sync-and-push.sh   # sync ~/.agents/skills -> skills/, validate frontmatter, commit & push if changed
+./scripts/sync-and-push.sh   # sync ~/.agents/skills -> skills/ -> .codex/skills/, validate frontmatter, commit & push if changed
 ```
 
 The script's frontmatter validation (also worth running manually after hand-editing `skills/`) requires, for every `skills/*/SKILL.md`:
@@ -29,11 +29,12 @@ The script's frontmatter validation (also worth running manually after hand-edit
 
 ## Architecture
 
-**Dual plugin manifest.** The repo ships two manifests pointing at the same `skills/` directory so one repo serves both clients:
-- `.claude-plugin/plugin.json` — Claude Code
-- `.zcode-plugin/plugin.json` — ZCode
+**Three-client distribution.** The repo ships two plugin manifests plus a plain mirror directory, all pointing at the same skill content:
+- `.claude-plugin/plugin.json` — Claude Code (marketplace/plugin install)
+- `.zcode-plugin/plugin.json` — ZCode (marketplace/plugin install)
+- `.codex/skills/` — Codex CLI, which has no plugin/manifest system; it auto-discovers any `SKILL.md` under `.codex/skills/` (project) or `~/.codex/skills/` (personal) at session startup. This directory is a byte-for-byte mirror of `skills/`, kept in sync by `scripts/sync-and-push.sh` — never edit it directly.
 
-Both must be bumped and kept in sync (version + description) together — there's no single source for the version number.
+The two manifests must be bumped and kept in sync (version + description) together — there's no single source for the version number.
 
 **Skill anatomy.** Each skill is a folder under `skills/` with a required `SKILL.md` (frontmatter: `name`, `description`) and optional `references/*.md` for material too long to keep inline (loaded by the model only when the skill's SKILL.md tells it to). The `description` field is what triggering is matched against, so it enumerates concrete trigger phrases (including Indonesian ones) rather than a generic summary.
 

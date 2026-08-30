@@ -1,6 +1,6 @@
 # ryakarsa
 
-Plugin skill untuk ZCode **dan** Claude Code — empat skill yang saling melengkapi:
+Plugin skill untuk ZCode, Claude Code, **dan** Codex CLI — empat skill yang saling melengkapi:
 
 | Skill | Fungsi |
 |---|---|
@@ -9,7 +9,7 @@ Plugin skill untuk ZCode **dan** Claude Code — empat skill yang saling melengk
 | [`prd-to-tasks`](#3-prd-to-tasks--pecah-prd-jadi-backlog-task) | PRD yang sudah disetujui → backlog task + checklist test case siap dikerjakan |
 | [`uiux-guide`](#4-uiux-guide--desain--review-antarmuka) | terapkan teori UI/UX saat mendesain atau mereview antarmuka |
 
-Repo ini membawa dua manifest sekaligus, jadi satu sumber untuk semua klien:
+Repo ini membawa manifest untuk tiap klien, plus satu cermin untuk Codex, jadi satu sumber untuk semua:
 
 ```text
 ryakarsa/
@@ -17,8 +17,14 @@ ryakarsa/
 │   └── plugin.json          # manifest untuk ZCode
 ├── .claude-plugin/
 │   └── plugin.json          # manifest untuk Claude Code
+├── .codex/
+│   └── skills/               # cermin persis dari skills/ — auto-discovery Codex CLI, tanpa manifest
+│       ├── prd/
+│       ├── prd-refine/
+│       ├── prd-to-tasks/
+│       └── uiux-guide/
 ├── scripts/
-│   └── sync-and-push.sh     # sinkron ~/.agents/skills → repo, commit & push
+│   └── sync-and-push.sh     # sinkron ~/.agents/skills → skills/ → .codex/skills/, commit & push
 └── skills/
     ├── prd/
     │   ├── SKILL.md
@@ -55,6 +61,16 @@ Atau tanpa plugin: salin folder skill ke `~/.claude/skills/`:
 ```bash
 cp -R skills/prd skills/prd-refine skills/prd-to-tasks skills/uiux-guide ~/.claude/skills/
 ```
+
+## Pasang di Codex CLI
+
+Codex CLI membaca skill dalam format `SKILL.md` yang sama (standar terbuka [agentskills.io](https://agentskills.io), tanpa manifest terpisah) — cukup taruh di lokasi yang di-scan otomatis saat startup:
+
+- **Per-project** (skill aktif hanya di repo ini): clone repo ini, lalu jalankan Codex dari dalamnya — direktori `.codex/skills/` di repo sudah berisi salinan keempat skill, langsung terbaca.
+- **Semua project** (skill aktif di mana pun Codex dijalankan):
+  ```bash
+  cp -R skills/prd skills/prd-refine skills/prd-to-tasks skills/uiux-guide ~/.codex/skills/
+  ```
 
 ## DeepSeek
 
@@ -134,4 +150,4 @@ Skill dikembangkan di `~/.agents/skills/` (sumber kebenaran), lalu disinkronkan 
 ./scripts/sync-and-push.sh
 ```
 
-Script melakukan rsync ketiga skill ke `skills/`, memvalidasi frontmatter, lalu commit & push jika ada perubahan.
+Script melakukan rsync keempat skill ke `skills/`, memvalidasi frontmatter, mencerminkan `skills/` ke `.codex/skills/`, lalu commit & push jika ada perubahan.
