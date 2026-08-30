@@ -21,6 +21,8 @@ Never skip a stage unless the user explicitly asks to ("langsung aja", "skip per
 
 Mine the conversation first: idea, audience, stack, and constraints the user already gave are answered — never re-ask.
 
+If the user hands over existing research — analytics, past user interviews, competitor teardown, support tickets — read it and treat it as answers, not as a prompt for more open questions on the same topic. Cite it directly in the plan/PRD ("berdasarkan data churn bulan lalu...") instead of an "(asumsi)" tag. Only ask a follow-up question where the data leaves a real gap the interview would otherwise cover.
+
 Classify the project to pick the question set (read `references/question-bank.md` before composing your batch):
 
 - new app / product
@@ -28,7 +30,7 @@ Classify the project to pick the question set (read `references/question-bank.md
 - internal tool
 - integration / API
 
-Then ask the questions using the **AskUserQuestion tool** when available (ZCode) — questions appear as pop-ups with clickable options, so the user answers by tapping, never by typing question numbers. **If the tool is not available** (e.g., running inside Claude Code or another client without AskUserQuestion), fall back to a numbered text list in a single message and tell the user they can answer with numbers like "3: a,c,f". Tool constraints below shape the interview when AskUserQuestion is used:
+Then ask the questions using the **AskUserQuestion tool** when it is available in the current client (Claude Code, ZCode, and others may all expose it) — questions appear as pop-ups with clickable options, so the user answers by tapping, never by typing question numbers. **Only if the tool is genuinely unavailable**, fall back to a numbered text list in a single message and tell the user they can answer with numbers like "3: a,c,f". Tool constraints below shape the interview when AskUserQuestion is used:
 
 - **Max 4 questions per pop-up** → split a 5–8 question interview into **2–3 waves** (e.g., wave 1 = questions 1–4, wave 2 = questions 5–8).
 - **Max 4 options per question** → cap options at 4. If more candidates exist, keep the 4 strongest or split into a separate question. "Lainnya"/"Other" is added automatically by the tool — never add it manually.
@@ -45,7 +47,7 @@ Wave shape (example, Indonesian — wave 1 of 2):
 
 After all waves, ask **at most 3 follow-ups**, and only for critical gaps: no target user, no scope boundary, or no success signal. Then stop asking — anything still unknown becomes an Open Question in the PRD.
 
-Tech stack: ask via pop-up (or text list if the tool is unavailable) — "Udah punya pilihan tech stack, atau mau AI yang tentuin?" → "Biarkan AI pilih" / "Pilih sendiri". If "pilih sendiri", collect per layer (frontend, backend, database, deployment) as one wave of up to 4 questions, each with concrete options plus "Mau AI rekomendasikan". If "biarkan AI pilih", propose the stack yourself in Stage 2 with one-line reasons. Skip this entirely for non-software projects.
+Tech stack: ask via pop-up when AskUserQuestion is available (or text list otherwise) — "Udah punya pilihan tech stack, atau mau AI yang tentuin?" → "Biarkan AI pilih" / "Pilih sendiri". If "pilih sendiri", collect per layer (frontend, backend, database, deployment) as one wave of up to 4 questions, each with concrete options plus "Mau AI rekomendasikan". If "biarkan AI pilih", propose the stack yourself in Stage 2 with one-line reasons. Skip this entirely for non-software projects.
 
 ## Stage 2 — Editable plan
 

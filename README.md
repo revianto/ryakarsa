@@ -1,12 +1,13 @@
 # ryakarsa
 
-Plugin skill untuk ZCode **dan** Claude Code — tiga skill yang saling melengkapi:
+Plugin skill untuk ZCode **dan** Claude Code — empat skill yang saling melengkapi:
 
 | Skill | Fungsi |
 |---|---|
 | [`prd`](#1-prd--buat-prd-dari-ide-mentah) | ide mentah → PRD siap bangun |
 | [`prd-refine`](#2-prd-refine--rapikan-prd-yang-sudah-ada) | PRD lama yang berantakan → rapi & buildable |
-| [`uiux-guide`](#3-uiux-guide--desain--review-antarmuka) | terapkan teori UI/UX saat mendesain atau mereview antarmuka |
+| [`prd-to-tasks`](#3-prd-to-tasks--pecah-prd-jadi-backlog-task) | PRD yang sudah disetujui → backlog task siap dikerjakan |
+| [`uiux-guide`](#4-uiux-guide--desain--review-antarmuka) | terapkan teori UI/UX saat mendesain atau mereview antarmuka |
 
 Repo ini membawa dua manifest sekaligus, jadi satu sumber untuk semua klien:
 
@@ -25,6 +26,8 @@ ryakarsa/
     │       ├── question-bank.md
     │       └── prd-template.md
     ├── prd-refine/
+    │   └── SKILL.md
+    ├── prd-to-tasks/
     │   └── SKILL.md
     └── uiux-guide/
         ├── SKILL.md
@@ -50,7 +53,7 @@ Di dalam Claude Code:
 Atau tanpa plugin: salin folder skill ke `~/.claude/skills/`:
 
 ```bash
-cp -R skills/prd skills/prd-refine skills/uiux-guide ~/.claude/skills/
+cp -R skills/prd skills/prd-refine skills/prd-to-tasks skills/uiux-guide ~/.claude/skills/
 ```
 
 ## DeepSeek
@@ -77,6 +80,8 @@ DeepSeek tidak punya format marketplace plugin sendiri, tapi bisa dipakai lewat 
 
 Tebakan yang harus diambil model selalu ditandai "(asumsi)" atau masuk *Open Questions* — tidak ada keputusan produk yang direkayasa diam-diam.
 
+Kalau sudah ada data existing (analytics, hasil wawancara user, riset kompetitor), lampirkan saja — skill langsung memakainya sebagai jawaban dan mengutipnya di plan/PRD, bukan menanyakan ulang hal yang sudah terjawab dari data tersebut.
+
 ### 2. `prd-refine` — rapikan PRD yang sudah ada
 
 **Kapan dipakai:** punya PRD/spesifikasi lama yang berantakan, kabur, atau kontradiktif.
@@ -90,7 +95,23 @@ Tebakan yang harus diambil model selalu ditandai "(asumsi)" atau masuk *Open Que
 
 Maksud penulis tidak pernah diubah: skill hanya menata dan mempertajam.
 
-### 3. `uiux-guide` — desain & review antarmuka
+Mendukung lebih dari satu dokumen sekaligus (mis. PRD + tech spec terpisah, atau dua draft yang perlu digabung) — konflik antar dokumen jadi temuan Consistency, bukan diselesaikan diam-diam. Kalau ada backup versi sebelumnya (`PRD_old.md`) di folder yang sama, ringkasan perubahan juga membandingkan terhadap versi itu, bukan cuma terhadap draft saat ini.
+
+### 3. `prd-to-tasks` — pecah PRD jadi backlog task
+
+**Kapan dipakai:** PRD sudah final/disetujui, saatnya diterjemahkan jadi task konkret yang bisa langsung dikerjakan (manusia atau AI).
+
+**Cara pakai:** bilang *"buat task dari PRD ini"*, *"breakdown fitur jadi task"*, *"pecah PRD jadi backlog"*, *"generate tickets from this PRD"*.
+
+**Alur:**
+1. **Scope** — pilih fase yang mau dipecah (Fase 1 saja atau semua), unit estimasi (SP/jam/T-shirt size), solo atau tim (menentukan label role per task).
+2. **Decompose** — tiap fitur dipecah jadi 1–5 task menurut seam alami (data model, backend, UI, integrasi, testing); acceptance criteria disalin persis dari PRD, bukan ditulis ulang.
+3. **Sequence** — task diurutkan sesuai dependency; dependency lintas fitur disebut eksplisit.
+4. **TASKS.md** — backlog per fase, tiap task punya ID, judul, acceptance criteria (checkbox), estimasi, dependency.
+
+Fitur yang di PRD-nya tidak punya acceptance criteria **tidak** diberi kriteria karangan — task-nya tetap dibuat tapi ditandai `⚠ butuh acceptance criteria`, lalu diarahkan balik ke `prd-refine`.
+
+### 4. `uiux-guide` — desain & review antarmuka
 
 **Kapan dipakai:** membuat halaman/screen/komponen apa pun, atau mengkritik & memperbaiki UI yang sudah ada (Flutter, Next.js, React, native).
 
@@ -99,6 +120,8 @@ Maksud penulis tidak pernah diubah: skill hanya menata dan mempertajam.
 **Dua mode:**
 1. **Mode desain** — aturan diterapkan saat membangun: design tokens, grid 8-point, proporsi warna 60-30-10, kontras WCAG AA (4.5:1), tap target ≥44px, thumb zone, pola baca Z/F, motion 200–300ms.
 2. **Mode review** — audit terhadap angka-angka kunci + checklist ship: temuan per aturan dengan perbaikan konkret ("padding 10px → 16px agar masuk grid 8-point") dan severity (aksesibilitas = blocking, proporsi/motion = polish).
+
+Kalau ada success metric dari PRD yang jadi acuan (mis. conversion checkout), skill ini juga memastikan aksi penentunya (klik CTA, submit form, tiap step funnel) punya titik instrumentasi yang jelas — bukan mendefinisikan metriknya (itu tugas `prd`), hanya memastikan UI-nya bisa diukur.
 
 Referensi teori lengkap (Gestalt, Nielsen, hukum kognitif, thumb zone): `skills/uiux-guide/references/panduan-lengkap.md`.
 

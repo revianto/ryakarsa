@@ -51,6 +51,8 @@ These thresholds come up in every task; apply them without being asked:
 
 Area kondisional — multi-bahasa (sediakan ruang text expansion 30–50%, hindari fixed-width per bahasa) dan search/filter (debounce 300–500ms, tampilkan jumlah hasil, no-results state dengan saran): lihat Bagian 20–21 di `references/panduan-lengkap.md` saat menyentuhnya.
 
+**Kalau ada PRD atau success metric yang jadi acuan** (mis. "conversion checkout", "completion rate onboarding"): pastikan aksi yang menentukan metrik itu (klik CTA, submit form, tiap step funnel) punya titik instrumentasi yang jelas di komponen — nama event/aksi yang mudah dipetakan ke analytics, bukan cuma di-desain lalu instrumentasinya diserahkan ke tim lain tanpa titik pasti. Ini bukan pengganti `prd` untuk mendefinisikan metriknya, hanya memastikan UI-nya bisa diukur.
+
 ## Review mode
 
 Audit the UI against the numbers table above and the ship checklist in `references/panduan-lengkap.md`. Verifikasi dari nilai aktual: hitung rasio kontras dari hex di kode/tema, dan baca px/spacing/font-size dari kode — jangan menilai dari kira-kira. Untuk review dari screenshot, tandai temuan yang tidak bisa diverifikasi dari kode sebagai perkiraan.
