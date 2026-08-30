@@ -6,7 +6,7 @@ Plugin skill untuk ZCode **dan** Claude Code — empat skill yang saling melengk
 |---|---|
 | [`prd`](#1-prd--buat-prd-dari-ide-mentah) | ide mentah → PRD siap bangun |
 | [`prd-refine`](#2-prd-refine--rapikan-prd-yang-sudah-ada) | PRD lama yang berantakan → rapi & buildable |
-| [`prd-to-tasks`](#3-prd-to-tasks--pecah-prd-jadi-backlog-task) | PRD yang sudah disetujui → backlog task siap dikerjakan |
+| [`prd-to-tasks`](#3-prd-to-tasks--pecah-prd-jadi-backlog-task) | PRD yang sudah disetujui → backlog task + checklist test case siap dikerjakan |
 | [`uiux-guide`](#4-uiux-guide--desain--review-antarmuka) | terapkan teori UI/UX saat mendesain atau mereview antarmuka |
 
 Repo ini membawa dua manifest sekaligus, jadi satu sumber untuk semua klien:
@@ -97,19 +97,20 @@ Maksud penulis tidak pernah diubah: skill hanya menata dan mempertajam.
 
 Mendukung lebih dari satu dokumen sekaligus (mis. PRD + tech spec terpisah, atau dua draft yang perlu digabung) — konflik antar dokumen jadi temuan Consistency, bukan diselesaikan diam-diam. Kalau ada backup versi sebelumnya (`PRD_old.md`) di folder yang sama, ringkasan perubahan juga membandingkan terhadap versi itu, bukan cuma terhadap draft saat ini.
 
-### 3. `prd-to-tasks` — pecah PRD jadi backlog task
+### 3. `prd-to-tasks` — pecah PRD jadi backlog task + checklist test case
 
-**Kapan dipakai:** PRD sudah final/disetujui, saatnya diterjemahkan jadi task konkret yang bisa langsung dikerjakan (manusia atau AI).
+**Kapan dipakai:** PRD sudah final/disetujui, saatnya diterjemahkan jadi task konkret yang bisa langsung dikerjakan (manusia atau AI) — sekaligus checklist QA supaya "PRD selesai" tidak berarti "siap ship tanpa dites".
 
-**Cara pakai:** bilang *"buat task dari PRD ini"*, *"breakdown fitur jadi task"*, *"pecah PRD jadi backlog"*, *"generate tickets from this PRD"*.
+**Cara pakai:** bilang *"buat task dari PRD ini"*, *"breakdown fitur jadi task"*, *"pecah PRD jadi backlog"*, *"generate tickets from this PRD"*, atau *"buatkan test case/checklist QA dari PRD ini"*.
 
 **Alur:**
-1. **Scope** — pilih fase yang mau dipecah (Fase 1 saja atau semua), unit estimasi (SP/jam/T-shirt size), solo atau tim (menentukan label role per task).
+1. **Scope** — pilih fase yang mau dipecah (Fase 1 saja atau semua), unit estimasi (SP/jam/T-shirt size), solo atau tim (menentukan label role per task), dan apakah checklist test case ikut dibuat (default ya).
 2. **Decompose** — tiap fitur dipecah jadi 1–5 task menurut seam alami (data model, backend, UI, integrasi, testing); acceptance criteria disalin persis dari PRD, bukan ditulis ulang.
-3. **Sequence** — task diurutkan sesuai dependency; dependency lintas fitur disebut eksplisit.
-4. **TASKS.md** — backlog per fase, tiap task punya ID, judul, acceptance criteria (checkbox), estimasi, dependency.
+3. **Test case** — tiap fitur dengan acceptance criteria dapat checklist happy path, edge case, dan error handling; kasus yang perilakunya tidak dijelaskan PRD ditandai "(perlu konfirmasi perilaku)", bukan dikarang.
+4. **Sequence** — task diurutkan sesuai dependency; dependency lintas fitur disebut eksplisit.
+5. **TASKS.md** — backlog per fase, tiap task punya ID, judul, acceptance criteria (checkbox), estimasi, dependency, diikuti checklist test case fitur tersebut.
 
-Fitur yang di PRD-nya tidak punya acceptance criteria **tidak** diberi kriteria karangan — task-nya tetap dibuat tapi ditandai `⚠ butuh acceptance criteria`, lalu diarahkan balik ke `prd-refine`.
+Fitur yang di PRD-nya tidak punya acceptance criteria **tidak** diberi kriteria atau test case karangan — task-nya tetap dibuat tapi ditandai `⚠ butuh acceptance criteria`, lalu diarahkan balik ke `prd-refine`.
 
 ### 4. `uiux-guide` — desain & review antarmuka
 
