@@ -15,7 +15,7 @@ Read the PRD the user points at (file path, pasted text, or link). If none was g
 
 **Multiple documents:** if the user hands over more than one related document (e.g. a PRD plus a separate tech spec, or two draft PRDs to merge), read all of them before auditing. Treat any conflict between documents as a Consistency finding in Step 2 — same as an internal contradiction — and merge into a single refined PRD rather than producing one output per input file.
 
-**Existing backup:** if a `<name>_old.md` (or similarly named prior version) sits next to the input in the same folder, read it as the previous version. Note in the final change summary what changed since that version, not just since the audit — this makes iteration-over-iteration drift visible instead of only the latest pass.
+**Existing backup:** if a `<name>_old.md` (or the highest-numbered `<name>_oldN.md`) sits next to the input in the same folder, read it as the previous version. Note in the final change summary what changed since that version, not just since the audit — this makes iteration-over-iteration drift visible instead of only the latest pass.
 
 Audit against this checklist and collect **concrete findings** with short quotes or references to the original text:
 
@@ -55,7 +55,7 @@ Apply the fixes:
 - Never delete content silently: scope-like removals move to *Non-goals* with the original wording; anything else dropped appears in the change summary with a reason.
 - Keep the original document's voice and terminology (feature names especially) — people and other docs reference them.
 
-**Output file:** keep the updated PRD at the original path. Before writing, rename the original as a backup: `PRD.md` → `PRD_old.md` (for any other input name, `<original>` → `<original>_old`, same folder). Then write the refined version to the original path — the updated PRD lives at `PRD.md` and the untouched old version stays readable at `PRD_old.md`. Never overwrite the original without creating this backup first.
+**Output file:** keep the updated PRD at the original path. Before writing, back up the current file — **rotate, never clobber**: if `<original>_old.md` doesn't exist yet, this is the first refine pass, so rename the current file to `<original>_old.md`. If `<original>_old.md` already exists, this isn't the first pass — moving straight to `_old.md` would destroy the very-first version it holds. Instead find the highest existing `<original>_oldN.md` and back up the current file one number past it (`_old.md` → next is `_old2.md`, then `_old3.md`, and so on), so every prior pass stays recoverable. Then write the refined version to the original path.
 
 Close with a change summary of ≤8 lines: what moved where, what was sharpened, what is now marked asumsi/perlu konfirmasi, and how many open questions remain.
 

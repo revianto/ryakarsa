@@ -128,6 +128,8 @@ Mendukung lebih dari satu dokumen sekaligus (mis. PRD + tech spec terpisah, atau
 
 Fitur yang di PRD-nya tidak punya acceptance criteria **tidak** diberi kriteria atau test case karangan — task-nya tetap dibuat tapi ditandai `⚠ butuh acceptance criteria`, lalu diarahkan balik ke `prd-refine`.
 
+**Dijalankan ulang di atas TASKS.md yang sudah ada** (mis. setelah PRD di-update): skill ini **merge**, bukan timpa — item `[x]` yang sudah dicentang dipertahankan selama ID & isinya belum berubah, task yang isinya berubah dianggap reset, dan task lama yang sudah tidak ada di PRD ditandai `⚠ tidak ada lagi di PRD` alih-alih dihapus diam-diam.
+
 ### 4. `uiux-guide` — desain, review & standar antarmuka
 
 **Kapan dipakai:** membuat halaman/screen/komponen apa pun, mengkritik & memperbaiki UI yang sudah ada (Flutter, Next.js, React, native), atau menyusun dokumen standar interaksi untuk tim design.

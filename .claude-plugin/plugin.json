@@ -1,6 +1,6 @@
 {
   "name": "ryakarsa",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "PRD & UI/UX toolkit — buat PRD baru dari ide (interview interaktif + plan bertahap), rapikan PRD lama (prd-refine), pecah PRD jadi backlog task + checklist test case (prd-to-tasks), dan terapkan teori UI/UX saat mendesain, mereview, atau menyusun standar interaksi antarmuka (uiux-guide)",
   "skills": "skills"
 }

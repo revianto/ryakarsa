@@ -15,6 +15,8 @@ Language: match the user's language and the PRD's own language.
 
 Read the PRD at the path the user gives, or `./PRD.md` if none is given — ask first if neither exists.
 
+**Existing TASKS.md:** if a backlog already exists at the target output path, read it before decomposing. It may have `[x]` checked items representing real completed work — this run must **merge**, never blindly overwrite.
+
 Ask (via **AskUserQuestion** when available, else a numbered list) only what changes the shape of the output:
 - Which phase(s) to break down now — just Fase 1 (MVP), or everything.
 - Estimate unit — story points, hours/days, or T-shirt size (S/M/L).
@@ -58,6 +60,8 @@ Phase boundaries from the PRD are fixed: never pull a later-phase task earlier o
 
 ## Step 5 — Write the backlog
 
+**Merge, don't overwrite, when TASKS.md already exists:** match items by task ID and by the checkbox's own text, not by position. Carry forward `[x]` for any task/acceptance-criteria/test-case line whose ID and wording are unchanged. If a task's title or criteria changed from the PRD, treat it as reset (unchecked) — what's being verified is different now, so a stale checkmark would be a false signal. A previously-listed task that no longer matches anything in the current PRD scope doesn't get silently deleted — flag it `⚠ tidak ada lagi di PRD, cek manual sebelum dihapus` so completed work isn't lost by a resequencing mistake.
+
 Write to `./TASKS.md` (or the path the user gave), grouped by phase, **all** of a feature's tasks first, then **one** test-case block for that feature right after — never one test-case block per task:
 
 ```markdown
@@ -98,9 +102,10 @@ Estimate: 3 SP · Depends on: T1.2.2
 - [ ] Error handling: endpoint gagal saat submit → UI tampilkan error, data form tidak hilang
 ```
 
-Close with a summary in ≤6 lines: file path, task count per phase, test-case count per phase (if generated), any `⚠ butuh acceptance criteria` / `(perlu konfirmasi perilaku)` flags and how many, and the critical-path dependency chain if one stands out.
+Close with a summary in ≤6 lines: file path, task count per phase, test-case count per phase (if generated), any `⚠ butuh acceptance criteria` / `(perlu konfirmasi perilaku)` / `⚠ tidak ada lagi di PRD` flags and how many, how many `[x]` were carried forward from an existing TASKS.md, and the critical-path dependency chain if one stands out.
 
 ## Handoff
 
 - If the PRD itself has vague/missing acceptance criteria on features the user wants broken down now, say so and suggest running `prd-refine` first — don't patch it silently here.
 - If no PRD exists yet, point to the `prd` skill instead of starting from a raw idea.
+- Once the backlog is written, building the UI is the natural next step — mention `uiux-guide` for applying UI/UX rules while building/reviewing, or for producing a standalone interaction & behavior standards doc from the same PRD — don't run it unasked.
