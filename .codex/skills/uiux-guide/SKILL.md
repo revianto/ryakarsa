@@ -1,14 +1,15 @@
 ---
 name: uiux-guide
-description: Apply UI/UX design theory — 60-30-10 color proportions, 8-point grid, Gestalt principles, Hick/Fitts/Jakob/Miller laws, thumb zone, WCAG contrast, Nielsen's heuristics, design tokens — whenever creating, designing, building, or reviewing any user interface (screen, page, component, form, dashboard, landing page) in any framework (Flutter, Next.js, React, native). Use whenever the user asks to design or build a UI/layout/screen/component, or to review, critique, or fix an existing interface — phrasings like "review UI", "kenapa UI-nya terasa berantakan", "cek tampilannya", "rapikan layout", "buat halaman X", "desain screen Y", "buat form Z" — even if they never say "UI/UX". Also for questions about spacing, color, typography, motion, dark mode, responsive breakpoints, form validation, or accessibility decisions in a UI. For creating or tidying PRDs, use the prd and prd-refine skills instead.
+description: Apply UI/UX design theory — 60-30-10 color proportions, 8-point grid, Gestalt principles, Hick/Fitts/Jakob/Miller laws, thumb zone, WCAG contrast, Nielsen's heuristics, design tokens — whenever creating, designing, building, or reviewing any user interface (screen, page, component, form, dashboard, landing page) in any framework (Flutter, Next.js, React, native). Use whenever the user asks to design or build a UI/layout/screen/component, or to review, critique, or fix an existing interface — phrasings like "review UI", "kenapa UI-nya terasa berantakan", "cek tampilannya", "rapikan layout", "buat halaman X", "desain screen Y", "buat form Z" — even if they never say "UI/UX". Also for questions about spacing, color, typography, motion, dark mode, responsive breakpoints, form validation, or accessibility decisions in a UI. Also use to produce a standalone interaction & behavior standards document (no color palette/font/layout) for a design team, typically derived from a PRD — phrasings like "buat interaction & behavior standar", "buat panduan tim design dari PRD ini", "design guideline dari PRD.md". For creating or tidying PRDs, use the prd and prd-refine skills instead.
 ---
 
 # UI/UX Guide
 
-Apply the UI/UX theory collected in `references/panduan-lengkap.md` (full guide: tables, examples, rationale) when building or reviewing interfaces. Two modes:
+Apply the UI/UX theory collected in `references/panduan-lengkap.md` (full guide: tables, examples, rationale) when building or reviewing interfaces. Three modes:
 
 - **Design mode** — the user asks you to create something visual (page, screen, component, flow). Apply the rules below *while* constructing, not as an afterthought.
 - **Review mode** — the user shows an existing UI (code, screenshot, spec) and wants critique or fixes. Audit it against the numbers table and the ship checklist, then report findings with evidence.
+- **Standards mode** — the user wants a standalone written document (not a UI itself) of the interaction/behavior rules — e.g. "buat interaction & behavior standar dari PRD ini untuk tim design". See below.
 
 Language: respond in the user's language.
 
@@ -64,6 +65,16 @@ Then report:
 3. **What passes** — sebutkan juga yang sudah benar, agar user tahu apa yang jangan diubah.
 
 Jangan menulis ulang seluruh UI kecuali diminta; ajukan perbaikan yang tertarget.
+
+## Standards mode
+
+Hasilkan dokumen berdiri sendiri berisi aturan interaksi & perilaku (behavior standards) — bukan mendesain/mereview UI tertentu, dan bukan design brief lengkap.
+
+1. **Sumber & scoping.** Kalau user mengacu ke PRD/spec (mis. "dari PRD.md"), baca file itu dulu. Tarik dari sana fitur dan pola interaksi apa saja yang benar-benar relevan (form panjang? pencarian? multi-bahasa? mobile-only? dark mode disebut?) — jangan tempel seluruh 21 bagian `references/panduan-lengkap.md` mentah-mentah kalau PRD tidak menyentuhnya. Kalau PRD tidak menyebutkan sesuatu yang biasanya relevan (mis. app mobile tapi tidak ada info platform convention), tandai sebagai "(perlu konfirmasi)" alih-alih diam-diam skip atau diam-diam mengarang.
+2. **Exclude identitas visual by default.** Dokumen ini TIDAK berisi: palet warna spesifik (hex/token warna), pemilihan font family, atau layout/wireframe per halaman — itu ranah design brief, bukan behavior standard. Rasio 60-30-10 dan skala tipografi (12/14/16/20/24/32px) boleh disebut sebagai *sistem/rule*, tapi tanpa nilai warna atau nama font aktual. Kalau user secara eksplisit minta palet/font/layout ikut dimasukkan, sertakan — jangan menahan permintaan eksplisit.
+3. **Struktur output**: kelompokkan per topik (aksesibilitas, spacing & tap target, interaction states, form UX, motion, system status/loading-empty-error, microcopy, tipografi (metrik saja), responsive, dark mode (prinsip saja), konvensi platform, gesture & safe area, icon-only accessibility, i18n, search & filter, Nielsen heuristics) — skip topik yang tidak relevan dengan PRD alih-alih memaksakan semuanya. Tutup dengan checklist ringkas siap-ship yang sudah di-scope ke fitur yang ada.
+4. **Angka tetap presisi, bukan disederhanakan** — pakai ambang yang sama dengan tabel "Non-negotiable numbers" di atas (kontras, tap target, breakpoint, durasi motion, dst.), jangan dibulatkan atau diparafrase jadi kualitatif.
+5. Dokumen ini melengkapi, bukan menggantikan, `prd-to-tasks` (yang menurunkan task/test-case) — kalau user sebenarnya minta breakdown task dari PRD, arahkan ke skill itu.
 
 ## Full reference
 
