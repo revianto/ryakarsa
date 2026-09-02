@@ -128,15 +128,16 @@ Mendukung lebih dari satu dokumen sekaligus (mis. PRD + tech spec terpisah, atau
 
 Fitur yang di PRD-nya tidak punya acceptance criteria **tidak** diberi kriteria atau test case karangan — task-nya tetap dibuat tapi ditandai `⚠ butuh acceptance criteria`, lalu diarahkan balik ke `prd-refine`.
 
-### 4. `uiux-guide` — desain & review antarmuka
+### 4. `uiux-guide` — desain, review & standar antarmuka
 
-**Kapan dipakai:** membuat halaman/screen/komponen apa pun, atau mengkritik & memperbaiki UI yang sudah ada (Flutter, Next.js, React, native).
+**Kapan dipakai:** membuat halaman/screen/komponen apa pun, mengkritik & memperbaiki UI yang sudah ada (Flutter, Next.js, React, native), atau menyusun dokumen standar interaksi untuk tim design.
 
-**Cara pakai:** bilang *"buatkan halaman X"*, *"desain screen Y"*, atau *"review UI ini, kenapa rasanya berantakan?"* — teori diterapkan otomatis, tanpa perlu menyebut "UI/UX".
+**Cara pakai:** bilang *"buatkan halaman X"*, *"desain screen Y"*, *"review UI ini, kenapa rasanya berantakan?"*, atau *"dari PRD.md buat interaction & behavior standar untuk panduan tim design"* — teori diterapkan otomatis, tanpa perlu menyebut "UI/UX".
 
-**Dua mode:**
+**Tiga mode:**
 1. **Mode desain** — aturan diterapkan saat membangun: design tokens, grid 8-point, proporsi warna 60-30-10, kontras WCAG AA (4.5:1), tap target ≥44px, thumb zone, pola baca Z/F, motion 200–300ms.
 2. **Mode review** — audit terhadap angka-angka kunci + checklist ship: temuan per aturan dengan perbaikan konkret ("padding 10px → 16px agar masuk grid 8-point") dan severity (aksesibilitas = blocking, proporsi/motion = polish).
+3. **Mode standards** — hasilkan dokumen `UI-STANDARDS.md`: aturan interaksi & perilaku (states, form UX, motion, aksesibilitas, responsive, microcopy) yang di-scope dari PRD, **tanpa** palet warna, font family, atau layout per halaman — itu ranah design brief, bukan behavior standard.
 
 Kalau ada success metric dari PRD yang jadi acuan (mis. conversion checkout), skill ini juga memastikan aksi penentunya (klik CTA, submit form, tiap step funnel) punya titik instrumentasi yang jelas — bukan mendefinisikan metriknya (itu tugas `prd`), hanya memastikan UI-nya bisa diukur.
 
