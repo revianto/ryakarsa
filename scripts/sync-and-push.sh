@@ -7,7 +7,7 @@ set -euo pipefail
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 SRC="$HOME/.agents/skills"
-SKILLS=(prd prd-refine uiux-guide prd-to-tasks)
+SKILLS=(prd prd-refine uiux-guide prd-to-tasks design-brief)
 
 for s in "${SKILLS[@]}"; do
   if [ ! -d "$SRC/$s" ]; then
