@@ -56,11 +56,25 @@ Sebelum menyimpan file, audit brief sendiri terhadap tanda-tanda AI slop, revisi
 
 ## Output
 
-Tulis ke `./DESIGN-BRIEF.md` kecuali user sebut path lain. Kalau file itu sudah ada, backup dulu ke `DESIGN-BRIEF_old.md` sebelum menimpa — jangan menimpa diam-diam. Tutup dengan ringkasan ≤6 baris: path file, filosofi inti (1 kalimat warna+tipografi+layout), berapa area UI yang di-cover, berapa referensi riset dipakai, dan berapa item "(perlu konfirmasi)" yang tersisa.
+Tulis ke `./DESIGN-BRIEF.md` kecuali user sebut path lain. Kalau file itu sudah ada, backup dulu ke `DESIGN-BRIEF_old.md` sebelum menimpa — jangan menimpa diam-diam.
+
+## 6. Auto-generate starter kit (component-library + animation-library)
+
+Setelah `DESIGN-BRIEF.md` tersimpan, lanjutkan otomatis — jangan berhenti dan menunggu user memintanya secara terpisah. Turunkan starter kit dasar dari filosofi yang baru ditetapkan di tahap 2, bukan generate ulang seluruh brief:
+
+- **3 komponen** lewat `component-library` (alur "tambah dari deskripsi teks"): primary button, card dasar, nav/header. Deskripsi yang dikirim ke skill itu HARUS mengutip filosofi warna/tipografi/layout dari brief ini (mis. "button primer, warna aksen [X] dari brief, radius sesuai arah layout [Y]"), bukan deskripsi generik.
+- **2 animasi** lewat `animation-library`: satu entrance/fade yang cocok dengan ritme visual brief (whitespace generous → transisi lebih lambat/lembut; compact/dashboard → cepat/snappy), satu hover/interaction feedback yang cocok dengan tone (playful → bounce halus; professional/trust → fade/scale halus).
+- **Penamaan**: prefix nama produk dari PRD ke setiap nama entry (mis. `acme-btn-primary`, bukan `btn-primary`) supaya tidak bentrok atau ketiban entry dari brief produk lain.
+- **Source**: tandai `prompt` seperti alur normal kedua skill itu.
+- **Fallback**: kalau `component-library` atau `animation-library` tidak terpasang di environment ini, skip bagian itu saja secara diam-diam (jangan gagalkan design-brief), dan sebutkan di ringkasan penutup bahwa bagian itu dilewati.
+- Ini starter kit dasar (5 item), BUKAN generate komponen untuk tiap layar/fitur di PRD — jangan diperluas lebih dari itu di sini; komponen spesifik per layar tetap dibuat manual lewat `component-library` saat user memang memintanya nanti.
+
+Tutup dengan ringkasan ≤8 baris: path file brief, filosofi inti (1 kalimat warna+tipografi+layout), berapa area UI yang di-cover, berapa referensi riset dipakai, berapa item "(perlu konfirmasi)" yang tersisa, dan daftar nama komponen/animasi yang berhasil dibuat (atau catatan kalau di-skip).
 
 ## Handoff
 
 - Belum ada PRD: `prd` untuk bikin dari ide mentah, `prd-refine` untuk merapikan yang sudah ada.
-- Setelah design brief ini ada, penerapan ke UI nyata (komponen, halaman) pakai `uiux-guide` Design mode — brief ini kasih arah visual, `uiux-guide` kasih aturan teknis penerapannya (kontras, grid, tap target, dst.).
+- Setelah design brief ini ada, `component-library` & `animation-library` otomatis terpicu untuk starter kit dasar (lihat tahap 6) — tidak perlu diminta terpisah.
+- Penerapan lanjutan ke UI nyata (komponen lain, halaman penuh) pakai `uiux-guide` Design mode — brief ini kasih arah visual, `uiux-guide` kasih aturan teknis penerapannya (kontras, grid, tap target, dst.).
 - Butuh dokumen behavior/interaction standard tanpa identitas visual (bukan ini): `uiux-guide` Standards mode.
 - Butuh breakdown task/test-case dari PRD, bukan desain: `prd-to-tasks`.
