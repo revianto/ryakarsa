@@ -69,7 +69,13 @@ Setelah `DESIGN-BRIEF.md` tersimpan, lanjutkan otomatis — jangan berhenti dan 
 - **Fallback**: kalau `component-library` atau `animation-library` tidak terpasang di environment ini, skip bagian itu saja secara diam-diam (jangan gagalkan design-brief), dan sebutkan di ringkasan penutup bahwa bagian itu dilewati.
 - Ini starter kit dasar (5 item), BUKAN generate komponen untuk tiap layar/fitur di PRD — jangan diperluas lebih dari itu di sini; komponen spesifik per layar tetap dibuat manual lewat `component-library` saat user memang memintanya nanti.
 
-Tutup dengan ringkasan ≤8 baris: path file brief, filosofi inti (1 kalimat warna+tipografi+layout), berapa area UI yang di-cover, berapa referensi riset dipakai, berapa item "(perlu konfirmasi)" yang tersisa, dan daftar nama komponen/animasi yang berhasil dibuat (atau catatan kalau di-skip).
+**Cek React Bits (kondisional, bukan default)**: hanya pertimbangkan kalau DUA syarat ini terpenuhi —
+1. Stack-nya React/Next.js (disebutkan eksplisit di PRD, atau terdeteksi dari `package.json`/`components.json` di project saat ini)
+2. Brief ini butuh visual motion-heavy (landing page, hero section, scroll-reveal, background animasi) — BUKAN untuk dashboard padat/utility app
+
+Kalau dua syarat itu terpenuhi: sebut di brief (bagian riset referensi atau starter kit) rekomendasi komponen React Bits (reactbits.dev) yang cocok dengan mood — mis. background animasi untuk hero, fade-on-scroll untuk section reveal — sebagai alternatif ke entry `animation-library` buatan tangan untuk kebutuhan itu spesifik. **Jangan auto-install** — ini cuma rekomendasi tertulis; pemasangan registry `@react-bits` ke `components.json` project (lihat memory `reference-react-bits-mcp`) tetap harus dikonfirmasi user dulu karena mengubah config project. Kalau salah satu syarat tidak terpenuhi, jangan sebut React Bits sama sekali — jangan dipaksakan.
+
+Tutup dengan ringkasan ≤8 baris: path file brief, filosofi inti (1 kalimat warna+tipografi+layout), berapa area UI yang di-cover, berapa referensi riset dipakai, berapa item "(perlu konfirmasi)" yang tersisa, daftar nama komponen/animasi yang berhasil dibuat (atau catatan kalau di-skip), dan kalau relevan — rekomendasi React Bits yang disebutkan.
 
 ## Handoff
 
