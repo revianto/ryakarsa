@@ -1,0 +1,3 @@
+# Data pribadi user (animasi/komponen tersimpan), bukan bagian dari definisi skill
+skills/*/library/
+.codex/skills/*/library/

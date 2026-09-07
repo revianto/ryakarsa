@@ -7,14 +7,15 @@ set -euo pipefail
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 SRC="$HOME/.agents/skills"
-SKILLS=(prd prd-refine uiux-guide prd-to-tasks design-brief)
+SKILLS=(prd prd-refine uiux-guide prd-to-tasks design-brief animation-library component-library)
 
 for s in "${SKILLS[@]}"; do
   if [ ! -d "$SRC/$s" ]; then
     echo "LEWATI: $s tidak ada di $SRC"
     continue
   fi
-  rsync -a --delete "$SRC/$s/" "$REPO/skills/$s/"
+  # library/ berisi data pribadi (animasi/komponen tersimpan user), bukan definisi skill — jangan ikut publik
+  rsync -a --delete --exclude 'library/' "$SRC/$s/" "$REPO/skills/$s/"
 done
 
 cd "$REPO"
