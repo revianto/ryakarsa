@@ -1,6 +1,6 @@
 # Pola animasi per stack
 
-Panduan singkat: kapan pakai stack yang mana, dan bagaimana pola idiomatisnya. `stack` di `index.json` harus salah satu dari: `vanilla-css`, `vanilla-js`, `tailwind`, `gsap`, `framer-motion`.
+Panduan singkat: kapan pakai stack yang mana, dan bagaimana pola idiomatisnya. `stack` di `index.json` harus salah satu dari: `vanilla-css`, `vanilla-js`, `tailwind`, `gsap`, `framer-motion`, `motion`.
 
 ## vanilla-css (default)
 
@@ -87,6 +87,36 @@ Untuk komponen React yang idealnya animasinya deklaratif dan terikat ke state/pr
 
 ```jsx
 import { motion } from "framer-motion";
+
+export function FadeInCard({ children }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+```
+
+## motion
+
+Library Motion (motion.dev, dulu Motion One) — pakai Web Animations API native browser, jauh lebih ringan dari GSAP (~5kb vs ~30kb+) dan hardware-accelerated by default. Pilih ini kalau project butuh performa/bundle-size ketat tapi tetap ingin timeline/sequencing lebih mumpuni dari CSS murni, dan TIDAK butuh fitur niche GSAP (MorphSVG, DrawSVG, physics easing kompleks). Untuk project vanilla JS/HTML (bukan React) pakai `animate`/`timeline` dari paket inti `motion`; untuk React ada `motion/react` dengan API mirip framer-motion.
+
+```js
+import { animate } from "motion";
+
+animate(".anim-target",
+  { opacity: [0, 1], y: [16, 0] },
+  { duration: 0.8, easing: [0.16, 1, 0.3, 1] }
+);
+```
+
+```jsx
+// motion/react — API-nya sangat mirip framer-motion
+import { motion } from "motion/react";
 
 export function FadeInCard({ children }) {
   return (

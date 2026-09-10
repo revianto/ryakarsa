@@ -7,7 +7,7 @@ description: Kelola library animasi CSS/JS pribadi milik user dan terapkan anima
 
 Skill ini memberi Claude sebuah "lemari" berisi snippet animasi CSS/JS milik user sendiri, yang terus tumbuh seiring waktu. User bisa menambah animasi baru, melihat isi lemarinya, mengubah, menghapus, dan yang paling sering: minta animasi itu (atau animasi baru) langsung dipasang ke project mereka.
 
-Karena lemari ini dipakai berulang-ulang lintas project dan lintas waktu, konsistensi penamaan dan metadata itu penting — bukan supaya rapi doang, tapi supaya nanti gampang dicari lagi ("animasi yang kayak kemarin itu apa namanya ya?"). Makanya setiap snippet punya identitas: nama unik, kategori, tag, deskripsi singkat, dan stack (vanilla CSS/JS, Tailwind, GSAP, atau React/framer-motion).
+Karena lemari ini dipakai berulang-ulang lintas project dan lintas waktu, konsistensi penamaan dan metadata itu penting — bukan supaya rapi doang, tapi supaya nanti gampang dicari lagi ("animasi yang kayak kemarin itu apa namanya ya?"). Makanya setiap snippet punya identitas: nama unik, kategori, tag, deskripsi singkat, dan stack (vanilla CSS/JS, Tailwind, GSAP, React/framer-motion, atau Motion).
 
 ## Struktur library
 
@@ -73,7 +73,7 @@ Jalankan dari dalam folder skill ini (`animation-library/`) supaya path relatif 
 User cerita animasi seperti apa yang dia mau, dengan bahasa natural — bukan spesifikasi teknis. Tugas Claude:
 
 1. Terjemahkan deskripsi itu ke kode. Kalau ada detail yang ambigu dan penting (durasi, easing, trigger seperti on-load vs on-scroll vs on-hover), boleh tanya singkat, tapi kalau sudah cukup jelas, langsung buat draft yang masuk akal daripada menahan progres dengan banyak pertanyaan.
-2. Pilih `stack` yang sesuai — default ke vanilla CSS/JS kecuali user menyebut Tailwind, GSAP, atau React/framer-motion, atau project yang sedang dikerjakan jelas-jelas pakai salah satunya.
+2. Pilih `stack` yang sesuai — default ke vanilla CSS/JS kecuali user menyebut Tailwind, GSAP, React/framer-motion, atau Motion, atau project yang sedang dikerjakan jelas-jelas pakai salah satunya. Kalau user cuma minta "yang ringan/performant" tanpa nama library spesifik dan animasinya butuh JS (bukan CSS murni), pertimbangkan `motion` dulu sebelum `gsap` — lebih kecil bundle-nya untuk kebutuhan animasi umum (lihat `references/stacks.md`).
 3. Tulis file kodenya ke `library/<category>/<name>.<ext>` (Write tool), lalu daftarkan lewat `manage_library.py add`.
 4. Tunjukkan hasil kodenya ke user secara singkat dan konfirmasi nama/kategorinya sudah pas.
 
@@ -120,8 +120,8 @@ Ini bukan sekadar preferensi gaya — beberapa hal ini menentukan apakah animasi
 - Sertakan durasi dan easing sebagai CSS custom property (`--duration`, `--ease`) kalau masuk akal, supaya orang yang pakai snippet ini nanti gampang tweak tanpa bongkar keyframes.
 - Hormati `prefers-reduced-motion` — tambahkan media query yang menonaktifkan/menyederhanakan animasi untuk user yang mengaktifkan setting itu di OS-nya, kecuali animasinya memang sudah sangat minimal.
 - Nama class harus spesifik dan namespaced (mis. `.anim-fade-in-slow` bukan `.fade`), supaya kecil kemungkinan bentrok dengan class lain di project user.
-- Untuk stack selain vanilla CSS/JS (Tailwind, GSAP, React/framer-motion), lihat `references/stacks.md` untuk pola dan contoh yang idiomatis di masing-masing — jangan tulis animasi GSAP dengan gaya vanilla CSS dipaksakan jadi JS, atau sebaliknya.
+- Untuk stack selain vanilla CSS/JS (Tailwind, GSAP, React/framer-motion, Motion), lihat `references/stacks.md` untuk pola dan contoh yang idiomatis di masing-masing — jangan tulis animasi GSAP dengan gaya vanilla CSS dipaksakan jadi JS, atau sebaliknya.
 
 ## Referensi
 
-- `references/stacks.md` — pola dan contoh kode untuk tiap stack (vanilla CSS/JS, Tailwind, GSAP, React/framer-motion), dan kapan masing-masing lebih cocok dipakai.
+- `references/stacks.md` — pola dan contoh kode untuk tiap stack (vanilla CSS/JS, Tailwind, GSAP, React/framer-motion, Motion), dan kapan masing-masing lebih cocok dipakai.
