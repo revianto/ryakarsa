@@ -19,6 +19,22 @@ Baca PRD (path dari user, atau `./PRD.md` default). Sebelum menulis apapun, ekst
 
 Setiap keputusan desain nanti HARUS bisa ditarik balik ke salah satu poin di atas. Kalau PRD tidak cukup detail untuk sebuah keputusan (mis. tidak ada info demografi tapi brief butuh nada visual), tandai eksplisit sebagai asumsi/perlu konfirmasi — jangan diam-diam mengisi dengan default.
 
+## 1a. Cek design system/token yang sudah ada
+
+Sebelum masuk ke tahap filosofi, scan project (working directory saat ini) untuk tanda design system yang sudah dibangun di luar Claude — mis. dari Antigravity/tool lain yang FE-nya sudah di-ACC user:
+
+- File token/config: `tailwind.config.*`, `design-tokens.json`, `theme.json`, CSS variables di `:root`/`globals.css`, `components.json` (shadcn), atau file style-guide lain.
+- Kode FE yang sudah jalan (komponen dengan className/style konsisten) yang mengindikasikan warna/tipografi/spacing sudah diputuskan, bukan cuma di-scaffold.
+
+**Kalau ditemukan** → masuk **mode extract**, bukan mode generate:
+- Tahap 2 (filosofi) diganti: BACA nilai aktual dari token/CSS/config yang ada (hex warna, nama font, scale spacing/radius), lalu tulis filosofi sebagai REKONSTRUKSI kenapa pilihan itu masuk akal untuk tujuan bisnis di tahap 1 — bukan mengarang philosophy baru lalu memaksakan token baru. Kalau ada token yang TIDAK bisa dijelaskan alasannya dari sinyal PRD (mis. warna aksen yang tidak match tujuan bisnis), tandai eksplisit sebagai "(gap: token ini ada tapi tidak match sinyal PRD — perlu klarifikasi user)", jangan diam-diam dibenarkan.
+- Tahap 3 (pecah per area UI) tetap jalan seperti biasa, tapi diikat ke pola yang SUDAH ada di kode FE, bukan usulan baru.
+- Tahap 4 (riset referensi) tetap jalan, tapi fungsinya bergeser dari "cari arah" jadi "validasi" — apakah sistem yang sudah ada ini konsisten dengan pola matang di industri, sebutkan kalau ada penyimpangan yang berisiko (mis. kontras kurang, skala tipografi tidak sistematis).
+- Tahap 5 (slop check) tetap jalan penuh.
+- Di ringkasan penutup, sebutkan eksplisit: "Design brief ini didokumentasikan dari design system existing (sumber: [nama file/config yang terdeteksi]), bukan digenerate baru."
+
+**Kalau tidak ditemukan** → lanjut mode generate seperti biasa (tahap 2 di bawah).
+
 ## 2. Tentukan filosofi (bukan cuma pilihan)
 
 Untuk tiga elemen inti, tulis ALASAN dulu baru pilihan — filosofi, bukan daftar token kosong:
@@ -60,7 +76,9 @@ Tulis ke `./DESIGN-BRIEF.md` kecuali user sebut path lain. Kalau file itu sudah 
 
 ## 6. Auto-generate starter kit (component-library + animation-library)
 
-Setelah `DESIGN-BRIEF.md` tersimpan, lanjutkan otomatis — jangan berhenti dan menunggu user memintanya secara terpisah. Turunkan starter kit dasar dari filosofi yang baru ditetapkan di tahap 2, bukan generate ulang seluruh brief:
+Setelah `DESIGN-BRIEF.md` tersimpan, lanjutkan otomatis — jangan berhenti dan menunggu user memintanya secara terpisah. Turunkan starter kit dasar dari filosofi yang baru ditetapkan di tahap 2, bukan generate ulang seluruh brief.
+
+**Kecuali mode extract (tahap 1a) dan FE existing sudah punya komponen button/card/nav yang jalan** — skip starter kit ini sepenuhnya (jangan generate ulang yang sudah ada), sebutkan di ringkasan penutup bahwa starter kit dilewati karena komponen setara sudah ada di FE existing. Kalau mode extract tapi FE existing belum punya salah satu dari ketiga komponen itu, tetap generate yang hilang saja (bukan ketiganya).
 
 - **3 komponen** lewat `component-library` (alur "tambah dari deskripsi teks"): primary button, card dasar, nav/header. Deskripsi yang dikirim ke skill itu HARUS mengutip filosofi warna/tipografi/layout dari brief ini (mis. "button primer, warna aksen [X] dari brief, radius sesuai arah layout [Y]"), bukan deskripsi generik.
 - **2 animasi** lewat `animation-library`: satu entrance/fade yang cocok dengan ritme visual brief (whitespace generous → transisi lebih lambat/lembut; compact/dashboard → cepat/snappy), satu hover/interaction feedback yang cocok dengan tone (playful → bounce halus; professional/trust → fade/scale halus).
