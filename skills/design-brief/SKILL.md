@@ -5,7 +5,9 @@ description: Turn an approved PRD into a visual design brief — color philosoph
 
 # Design Brief
 
-Ubah PRD yang sudah ada menjadi design brief visual — identitas visual (warna, tipografi, layout) yang berakar dari tujuan bisnis di PRD, bukan template generik. Lima tahap wajib, berurutan.
+Ubah PRD yang sudah ada menjadi design brief visual — identitas visual (warna, tipografi, layout) yang berakar dari tujuan bisnis di PRD, bukan template generik.
+
+Alurnya berurutan: **tahap 1** (baca PRD) → **1a/1b** (cek token & aset brand yang sudah ada) → **1c** (wawancara kebutuhan UI — wajib, jangan dilewati) → **2-5** (filosofi, pecah per area UI, riset referensi, slop check) → **6-7** (starter kit komponen/animasi, daftarkan ke `design-tokens`). Tahap 6-7 jalan otomatis setelah brief tersimpan, tidak perlu diminta terpisah.
 
 ## 1. Baca PRD, tarik sinyal desain
 

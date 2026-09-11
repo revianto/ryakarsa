@@ -21,6 +21,7 @@ Audit against this checklist and collect **concrete findings** with short quotes
 
 **Structure**
 - Missing or buried sections: problem, goals/non-goals, target users, requirements, success metrics, open questions
+- **Positioning & brand tone belum ada** — PRD yang dibuat sebelum section ini masuk ke template (`../prd/references/prd-template.md` section 5) biasanya tidak punya tone brand, tingkat eksklusivitas (mass-market/mid/premium), dan kompetitor+pembeda di satu tempat. Ini bukan sekadar kerapian: skill `design-brief` menariknya dari situ untuk menentukan tingkat ornamen UI, jadi PRD tanpa section ini akan selamanya menghasilkan brief ber-"(perlu konfirmasi)". Untuk produk consumer-facing/berbayar, angkat jadi finding; **kalau infonya benar-benar tidak ada di dokumen, jangan karang** — tanyakan di Step 2 atau taruh di Open Questions. Untuk internal tool/API, lewati saja (tulis "N/A", jangan dipaksakan)
 - Same topic scattered in several places; requirements mixed into background story
 - No phasing or priority — everything reads as equally urgent
 
