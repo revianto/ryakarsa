@@ -133,3 +133,20 @@ Ini bukan sekadar preferensi gaya — beberapa hal ini menentukan apakah kompone
 - Nama class harus spesifik dan namespaced (mis. `.comp-pricing-card` bukan `.card`), supaya kecil kemungkinan bentrok dengan class lain saat ditempel ke project user.
 - Pakai CSS custom property untuk nilai yang mungkin sering di-tweak (warna brand, radius, spacing utama), supaya gampang dikustomisasi tanpa bongkar seluruh style.
 - Kalau komponennya extend dari sesuatu yang sudah ada di library (mis. varian lain dari card yang sudah tersimpan), lihat dulu komponen itu (`get`) supaya konsisten gaya, alih-alih membangun dari nol dengan konvensi yang beda.
+
+## Dari mana nilai warna/tipografi/spacing diambil
+
+**Jangan mengarang warna atau font sendiri kalau sudah ada sumbernya.** Urutan mencari:
+
+1. **User menyebut design system tertentu** (mis. "pakai design system 'rebrew'") atau komponen ini turunan dari sebuah design brief → ambil nilainya dari skill `design-tokens` (`manage_library.py get --name <nama>`), pakai sebagai CSS custom property di komponen, dan sebutkan design system mana yang dipakai saat melapor ke user.
+2. **Komponen dibuat untuk project yang sedang dibuka** dan project itu punya token sendiri (`tailwind.config.*`, CSS variables di `:root`) → pakai nilai dari situ.
+3. **Tidak ada keduanya** → baru tentukan sendiri, nyatakan eksplisit itu pilihanmu (bukan dari brand guideline user), dan tawarkan singkat untuk menyimpannya sebagai design system baru di `design-tokens` supaya komponen berikutnya konsisten.
+
+Tetap pakai CSS custom property di bagian atas komponen (mis. `--comp-accent: #E59524;`) apapun sumbernya — supaya nilai yang ditarik dari design system gampang ditukar saat komponen dipasang ke project dengan tema berbeda.
+
+## Handoff
+
+- **Aturan teknis penerapan** (kontras WCAG, grid 8-point, tap target ≥44px, interaction states, kapan pakai radio vs dropdown): `uiux-guide` — skill ini menyimpan komponennya, `uiux-guide` memastikan komponennya benar secara UX/aksesibilitas.
+- **Nilai token** (warna/tipografi/spacing dari design system tersimpan): `design-tokens`.
+- **Animasi/transisi** untuk komponen ini: `animation-library` — simpan terpisah supaya bisa dipasang ulang ke komponen lain.
+- **Identitas visual dari nol** (belum ada arah warna/font sama sekali, masih punya PRD): `design-brief` dulu, baru balik ke sini.

@@ -122,6 +122,20 @@ Ini bukan sekadar preferensi gaya — beberapa hal ini menentukan apakah animasi
 - Nama class harus spesifik dan namespaced (mis. `.anim-fade-in-slow` bukan `.fade`), supaya kecil kemungkinan bentrok dengan class lain di project user.
 - Untuk stack selain vanilla CSS/JS (Tailwind, GSAP, React/framer-motion, Motion), lihat `references/stacks.md` untuk pola dan contoh yang idiomatis di masing-masing — jangan tulis animasi GSAP dengan gaya vanilla CSS dipaksakan jadi JS, atau sebaliknya.
 
+## Dari mana durasi/easing diambil
+
+**Jangan tentukan durasi/easing acak kalau sudah ada sumbernya.** Urutan mencari:
+
+1. **User menyebut design system tertentu**, atau animasi ini turunan dari sebuah design brief → cek `design-tokens` (`manage_library.py get --name <nama>`) untuk kategori `motion` (`duration`/`easing`). Kalau design system itu punya level animasi yang sudah ditetapkan (Minimal/Sedang/Kaya — lihat skill `design-brief`), hormati itu: jangan bikin animasi showcase untuk design system yang levelnya "Minimal".
+2. **Project yang sedang dibuka** punya konvensi animasi sendiri (keyframes di `globals.css`, durasi yang berulang di komponen lain) → ikuti pola itu supaya konsisten.
+3. **Tidak ada keduanya** → pakai default `uiux-guide`: 200–300ms untuk micro-interaction, 300–500ms untuk transisi antar layar, easing `ease-in-out`/`cubic-bezier` (jangan pernah `linear`), dan selalu sediakan fallback `prefers-reduced-motion`.
+
+## Handoff
+
+- **Nilai motion token** (durasi/easing dari design system tersimpan): `design-tokens`, kategori `motion`.
+- **Aturan kapan motion boleh dipakai** (durasi wajar, reduced-motion, motion yang justru menambah beban kognitif): `uiux-guide`.
+- **Komponen yang dianimasikan**: `component-library` — simpan komponennya di sana, animasinya di sini, supaya animasi yang sama bisa dipasang ke beberapa komponen.
+
 ## Referensi
 
 - `references/stacks.md` — pola dan contoh kode untuk tiap stack (vanilla CSS/JS, Tailwind, GSAP, React/framer-motion, Motion), dan kapan masing-masing lebih cocok dipakai.
