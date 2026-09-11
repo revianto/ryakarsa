@@ -66,7 +66,7 @@ Jangan langsung lanjut ke tahap 2 berdasarkan tebakan dari sinyal PRD saja. Tany
    - **Kaya/immersive** — motion jadi bagian dari storytelling: scroll-driven sequence (mis. video/image-sequence scrubbing ala Apple product page), orchestrated entrance, parallax, ambient motion. Butuh effort implementasi jauh lebih besar (lihat pembahasan GSAP+ScrollTrigger/video-scrub sebelumnya) — sebutkan trade-off effort ini ke user saat menawarkan opsi ini, jangan cuma menyebut nama levelnya.
    - Level ini menentukan seberapa jauh rekomendasi motion di tahap 2 dan starter kit animasi di tahap 6 (lihat di bawah) — jangan generate animasi "Kaya" kalau user pilih "Minimal", dan sebaliknya jangan kasih animasi seadanya kalau user eksplisit minta "Kaya".
 
-5. **Referensi/inspirasi visual yang sudah ada** — apakah user sudah punya arah visual (link produk, nama brand, screenshot) yang ingin dijadikan acuan? Kalau ada, tahap 4 (riset referensi) berubah fungsi dari "cari dari nol" jadi "validasi & elaborasi dari referensi yang diberikan itu" — jangan mengabaikannya dan menyodorkan pilihan sendiri yang tidak diminta. Kalau tidak ada, tahap 4 tetap jalan seperti biasa (riset dari nol berdasarkan mood yang ditentukan di tahap 2).
+5. **Referensi/inspirasi visual yang sudah ada** — apakah user sudah punya arah visual (link produk, nama brand, screenshot) yang ingin dijadikan acuan? Kalau ada, tahap 4 (riset referensi) berubah fungsi dari "cari dari nol" jadi "**nilai** referensi itu": dipakai penuh, dipakai sebagian, atau ditolak dengan alasan — bukan diabaikan lalu diganti pilihan sendiri diam-diam, tapi juga bukan diterima mentah-mentah tanpa dinilai (lihat tahap 4 untuk aturan vonisnya). Kalau user tidak punya referensi, tahap 4 tetap jalan seperti biasa (riset dari nol berdasarkan mood yang ditentukan di tahap 2).
 
 6. **Target dark mode** — tanyakan eksplisit, jangan diasumsikan dari kategori produk. Opsi:
    - **Ya, sejak awal** — palet warna di tahap 2 WAJIB ditulis sebagai pasangan light/dark per peran warna (background, foreground, accent, dst.), bukan cuma light lalu dark ditambah belakangan — ini mengubah cara token ditulis sejak awal (semantic naming yang tahan banting, bukan hex tunggal).
@@ -98,7 +98,15 @@ Area yang tidak relevan (mis. PRD tidak menyebut mobile app) di-skip, jangan dip
 
 ## 4. Riset referensi UI nyata — bukan istilah kosong
 
-**Kalau user sudah kasih referensi/inspirasi di tahap 1c** — jangan cari dari nol. Buka/analisis referensi yang diberikan (link, screenshot, atau nama produk yang disebut) dan elaborasi: pola spesifik apa dari referensi itu yang relevan diambil, apakah cocok penuh atau perlu disesuaikan dengan mood tahap 2, dan validasi dengan 0-2 referensi tambahan kalau perlu pembanding — bukan mengabaikan referensi user dan menyodorkan riset independen.
+**Kalau user sudah kasih referensi/inspirasi di tahap 1c** — jangan cari dari nol, tapi **jangan juga terima mentah-mentah**. Buka/analisis referensi yang diberikan (link, screenshot, atau nama produk yang disebut), lalu **nilai kecocokannya secara eksplisit** terhadap sinyal tahap 1 (tujuan bisnis, audiens, positioning) dan filosofi tahap 2 — bukan sekadar mengelaborasi apa yang sudah ada di situ.
+
+Tiap referensi user wajib dapat salah satu dari tiga vonis, ditulis terus terang di brief:
+
+- **Cocok penuh** — arah visualnya memang pas untuk produk ini. Sebutkan pola spesifik apa yang diambil dan kenapa, seperti riset biasa di bawah.
+- **Cocok sebagian** (paling sering terjadi) — sebutkan **bagian mana yang dipakai** (mis. "struktur navigasi dan cara mereka handle empty state") dan **bagian mana yang sengaja TIDAK dipakai** beserta alasannya yang ditarik ke tahap 1-2 (mis. "palet high-contrast neon mereka tidak dipakai — audiens produk ini 40+ dan konteks pakainya di luar ruangan, kontras ekstrem itu melelahkan; ambil struktur layout-nya saja, warnanya tetap dari filosofi tahap 2").
+- **Tidak cocok** — katakan langsung, jangan dipaksakan supaya terlihat akomodatif. Jelaskan benturannya secara konkret (mis. "referensi ini dashboard data-dense, sedangkan produk ini marketing site yang butuh satu aksi dominan per layar — meniru kepadatannya akan mengubur CTA"), lalu tawarkan 1-2 alternatif yang mendekati *maksud* user di balik referensi itu. Tanya balik apa yang sebenarnya menarik dari referensi tersebut — sering yang dia suka cuma satu aspek (mis. "rasanya mahal"), bukan keseluruhan eksekusinya.
+
+**Jangan mengarang keberatan** demi terlihat kritis: kalau referensinya memang cocok, bilang cocok. Yang dilarang itu menerima tanpa dinilai, bukan menyetujui. Boleh validasi dengan 0-2 referensi tambahan sebagai pembanding kalau perlu.
 
 **Kalau user tidak punya referensi** — cari referensi UI nyata yang cocok dengan mood dari tahap 2 lewat pencarian web:
 
@@ -115,6 +123,7 @@ Sebelum menyimpan file, audit brief sendiri terhadap tanda-tanda AI slop, revisi
 - **Klise default**: waspada pola default AI — Inter/Poppins + gradient ungu-ke-biru + rounded-2xl card + "clean and modern" tanpa spesifik. Kalau brief ini bisa langsung dipakai untuk produk lain tanpa mengubah kata apapun, itu terlalu generik — persempit sampai spesifik ke produk ini.
 - **Bahasa kosong**: cari kata sifat tanpa isi ("seamless", "intuitive", "sleek", "modern") yang tidak diikuti definisi konkret (angka, contoh, mekanisme) — ganti atau hapus.
 - **Asumsi diam-diam**: pastikan semua tebakan (brand personality, warna belum dikonfirmasi, dst.) ditandai eksplisit "(asumsi)"/"(perlu konfirmasi)", bukan ditulis seolah fakta dari PRD.
+- **Referensi user dinilai, bukan dirasionalisasi**: kalau user memberi referensi di tahap 1c, cek apakah brief ini benar-benar memberi vonis (cocok penuh / cocok sebagian dengan bagian yang ditolak disebutkan / tidak cocok), atau cuma menjelaskan ulang isi referensi itu dengan bahasa yang lebih meyakinkan. Kalau semua referensi user kebetulan "cocok penuh" tanpa satupun catatan, curigai diri sendiri — periksa ulang apakah memang begitu atau kamu sedang menghindari ketidaksetujuan.
 
 ## Output
 
