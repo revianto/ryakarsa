@@ -12,9 +12,9 @@ Ubah PRD yang sudah ada menjadi design brief visual — identitas visual (warna,
 Baca PRD (path dari user, atau `./PRD.md` default). Sebelum menulis apapun, ekstrak dari PRD:
 - Tujuan bisnis & metrik sukses (mis. conversion, retention, trust)
 - Target audiens (demografi, tingkat literasi digital, konteks pakai — mobile-on-the-go vs desktop-fokus)
-- Personality/tone brand kalau disebutkan (playful, professional, luxury, dst.) — kalau tidak disebutkan, JANGAN mengarang; tandai "(perlu konfirmasi: brand personality tidak disebutkan di PRD)"
+- **Positioning & brand tone** — PRD yang dibuat dengan template terbaru punya section khusus untuk ini (section 5: tone brand, tingkat eksklusivitas mass-market/mid/premium, kompetitor & pembeda); **baca itu dulu**. Kalau PRD-nya versi lama tanpa section itu, cari sinyalnya di Ringkasan Eksekutif/Latar Belakang — dan kalau tetap tidak ada, JANGAN mengarang; tandai "(perlu konfirmasi: brand personality tidak disebutkan di PRD)" dan tanyakan di tahap 1c.
 - Daftar fitur/layar utama (jadi dasar pemecahan brief per kebutuhan UI di tahap 3)
-- Kompetitor yang disebut (kalau ada) — jadi acuan differensiasi, bukan ditiru
+- Kompetitor yang disebut (kalau ada, biasanya di section Positioning) — jadi acuan differensiasi, bukan ditiru
 - Platform (web/mobile/keduanya) dan constraint teknis yang menyinggung UI (mis. harus offline-first, harus accessible)
 
 Setiap keputusan desain nanti HARUS bisa ditarik balik ke salah satu poin di atas. Kalau PRD tidak cukup detail untuk sebuah keputusan (mis. tidak ada info demografi tapi brief butuh nada visual), tandai eksplisit sebagai asumsi/perlu konfirmasi — jangan diam-diam mengisi dengan default.
@@ -54,21 +54,27 @@ Jangan langsung lanjut ke tahap 2 berdasarkan tebakan dari sinyal PRD saja. Tany
 
 2. **Kebutuhan blok konten UI** — elemen apa saja yang perlu didesain treatment-nya: CTA, carousel/slider, testimonial, pricing table, FAQ accordion, stat/angka besar, dll. Kalau user tidak yakin, tawarkan opsi "Claude yang rekomendasikan dari fitur-fitur di PRD" — tapi tetap sebutkan daftar rekomendasinya secara eksplisit untuk dikonfirmasi user, jangan diam-diam menambah blok yang tidak pernah disebut atau disetujui.
 
-3. **Level animasi** — tanyakan HANYA kalau animasi/motion relevan (prioritas "Estetika & motion" dari poin 1, atau PRD/user menyinggung interaksi-animasi meski kategorinya lain). Jangan tanya kalau prioritasnya "Utility & efisiensi" murni tanpa singgungan animasi sama sekali — skip diam-diam, jangan basa-basi. Opsi:
+3. **Tingkat ornamen visual** — sumbu yang BERDIRI SENDIRI, jangan disamakan dengan poin 1 atau level animasi di poin 4: produk "layanan & kepercayaan" pun bisa sangat berornamen kalau positioning-nya eksklusif (private banking, wedding premium), sebaliknya produk "estetika & motion" bisa sengaja brutalis-polos. **Kalau PRD punya section "Positioning & Brand Tone"** (template PRD terbaru punya ini di section 5), tarik default-nya dari situ — mass-market → condong Polos/Sedang, premium-eksklusif → condong Kaya — lalu konfirmasi, jangan tanya dari nol. Opsi:
+   - **Polos/utilitarian** — permukaan flat, tanpa gradient/tekstur/ornamen dekoratif; setiap elemen visual punya fungsi. Cocok untuk tool, dashboard, produk yang dipakai berjam-jam (ornamen jadi beban visual).
+   - **Sedang** — aksen halus: shadow lembut, gradient tipis di satu-dua tempat, ilustrasi/ikon seperlunya. Default paling aman untuk kebanyakan produk consumer.
+   - **Kaya/eksklusif** — ornamen dekoratif jadi bagian identitas: tekstur, foil/gradient, border dekoratif, ilustrasi custom, detail mewah. Dipakai kalau eksklusivitas/craft memang bagian dari yang dijual — bukan sekadar "biar cantik". Sebutkan konsekuensinya ke user: butuh aset visual nyata (ilustrasi/tekstur/foto custom) yang harus diproduksi atau digenerate terpisah, tidak cukup dari CSS saja.
+   - Tingkat ini mengikat tahap 2 (terutama bullet *Surface treatment*) dan tahap 3 — jangan generate ornamen berat untuk yang pilih "Polos", dan jangan kasih hasil datar-polos kalau user pilih "Kaya".
+
+4. **Level animasi** — tanyakan HANYA kalau animasi/motion relevan (prioritas "Estetika & motion" dari poin 1, atau PRD/user menyinggung interaksi-animasi meski kategorinya lain). Jangan tanya kalau prioritasnya "Utility & efisiensi" murni tanpa singgungan animasi sama sekali — skip diam-diam, jangan basa-basi. Opsi:
    - **Minimal** — animasi murni fungsional (feedback state: loading, disabled, sukses/gagal), tanpa polesan dekoratif. Cocok default untuk "Layanan & kepercayaan"/"Utility & efisiensi" kalau tetap butuh sedikit motion.
    - **Sedang** — ditambah entrance/scroll-reveal halus dan hover feedback (fade, scale kecil, slide singkat) — motion terasa tapi tidak jadi sorotan utama.
    - **Kaya/immersive** — motion jadi bagian dari storytelling: scroll-driven sequence (mis. video/image-sequence scrubbing ala Apple product page), orchestrated entrance, parallax, ambient motion. Butuh effort implementasi jauh lebih besar (lihat pembahasan GSAP+ScrollTrigger/video-scrub sebelumnya) — sebutkan trade-off effort ini ke user saat menawarkan opsi ini, jangan cuma menyebut nama levelnya.
    - Level ini menentukan seberapa jauh rekomendasi motion di tahap 2 dan starter kit animasi di tahap 6 (lihat di bawah) — jangan generate animasi "Kaya" kalau user pilih "Minimal", dan sebaliknya jangan kasih animasi seadanya kalau user eksplisit minta "Kaya".
 
-4. **Referensi/inspirasi visual yang sudah ada** — apakah user sudah punya arah visual (link produk, nama brand, screenshot) yang ingin dijadikan acuan? Kalau ada, tahap 4 (riset referensi) berubah fungsi dari "cari dari nol" jadi "validasi & elaborasi dari referensi yang diberikan itu" — jangan mengabaikannya dan menyodorkan pilihan sendiri yang tidak diminta. Kalau tidak ada, tahap 4 tetap jalan seperti biasa (riset dari nol berdasarkan mood yang ditentukan di tahap 2).
+5. **Referensi/inspirasi visual yang sudah ada** — apakah user sudah punya arah visual (link produk, nama brand, screenshot) yang ingin dijadikan acuan? Kalau ada, tahap 4 (riset referensi) berubah fungsi dari "cari dari nol" jadi "validasi & elaborasi dari referensi yang diberikan itu" — jangan mengabaikannya dan menyodorkan pilihan sendiri yang tidak diminta. Kalau tidak ada, tahap 4 tetap jalan seperti biasa (riset dari nol berdasarkan mood yang ditentukan di tahap 2).
 
-5. **Target dark mode** — tanyakan eksplisit, jangan diasumsikan dari kategori produk. Opsi:
+6. **Target dark mode** — tanyakan eksplisit, jangan diasumsikan dari kategori produk. Opsi:
    - **Ya, sejak awal** — palet warna di tahap 2 WAJIB ditulis sebagai pasangan light/dark per peran warna (background, foreground, accent, dst.), bukan cuma light lalu dark ditambah belakangan — ini mengubah cara token ditulis sejak awal (semantic naming yang tahan banting, bukan hex tunggal).
    - **Tidak** — produk sengaja satu visual world (lihat contoh `undangoo-landing` yang sengaja light-only dengan satu spread gelap sebagai bagian dari identitas, bukan mode terpisah) — boleh pakai warna literal tanpa pasangan dark, tandai eksplisit di brief bahwa ini keputusan sadar.
    - **Nanti/belum tahu** — desain light dulu, tapi tetap strukturkan token dengan semantic naming (bukan nama warna mentah) supaya varian dark gampang ditambah belakangan tanpa rombak total.
    - Jawaban ini menentukan struktur token warna di tahap 2 dan format `tokens.json` kalau nanti didaftarkan ke `design-tokens` (lihat tahap 7).
 
-Kelima jawaban ini mengikat tahap 2-4 di bawah — jangan mulai menulis filosofi sebelum semuanya dikonfirmasi user.
+Keenam jawaban ini mengikat tahap 2-4 di bawah — jangan mulai menulis filosofi sebelum semuanya dikonfirmasi user.
 
 ## 2. Tentukan filosofi (bukan cuma pilihan)
 

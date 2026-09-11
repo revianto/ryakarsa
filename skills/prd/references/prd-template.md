@@ -23,11 +23,19 @@ Fill every section from the interview + the approved plan. Headings below are In
 ## 4. Pengguna Sasaran
 <!-- Tabel persona: nama, konteks, cara ngatasi masalah sekarang, kebutuhan, kenyamanan teknologi. Persona utama dulu. -->
 
-## 5. Cerita Pengguna & Alur Utama
+## 5. Positioning & Brand Tone
+<!-- Isi HANYA kalau produk ini punya sisi brand yang dilihat pengguna (consumer-facing, marketing site, produk berbayar). -->
+<!-- Untuk internal tool / API murni, tulis "N/A — internal, tidak ada positioning brand ke pengguna luar". -->
+<!-- Tone brand: 2–4 kata sifat konkret + lawannya, mis. "tenang & terpercaya (bukan playful/ramai)", "hangat & personal (bukan korporat)". -->
+<!-- Tingkat eksklusivitas: mass-market / mid / premium-eksklusif — plus alasannya (harga, target, kompetitor). Ini yang nanti menentukan seberapa berornamen UI-nya di design brief. -->
+<!-- Kompetitor / pembanding yang disebut user: nama + apa yang ditiru (kalau ada) dan apa yang sengaja DIBEDAKAN. -->
+<!-- Kalau user tidak menyebut apapun soal ini, jangan mengarang — tulis "(perlu konfirmasi)" dan masukkan ke Pertanyaan Terbuka. -->
+
+## 6. Cerita Pengguna & Alur Utama
 <!-- 3–5 user story: "Sebagai <persona>, aku ingin <aksi> agar <manfaat>." -->
 <!-- 1 happy-path flow bernomor untuk core job #1 dari interview. -->
 
-## 6. Kebutuhan Fungsional
+## 7. Kebutuhan Fungsional
 <!-- Dari feature tree yang sudah disetujui, dikelompokkan per fase. -->
 <!-- ID = F<fase>.<nomor>. Priority: P0 (MVP) / P1 / P2. Format per fitur: -->
 
@@ -54,20 +62,20 @@ Acceptance criteria:
 
 <!-- Fitur P1/P2 boleh acceptance criteria satu baris. -->
 
-## 7. Kebutuhan Non-Fungsional
+## 8. Kebutuhan Non-Fungsional
 <!-- Hanya yang relevan untuk produk ini; sisanya tulis "N/A". Performance, security, privacy & data, availability, accessibility, i18n. -->
 
-## 8. Metrik Keberhasilan
+## 9. Metrik Keberhasilan
 <!-- Tabel: metrik, target, cara ukur. 2–4 baris, sesuai jawaban success signal. -->
 
-## 9. Teknologi
+## 10. Teknologi
 <!-- Per layer: pilihan + alasan satu baris. Jika user memilih "Biarkan AI pilih", catat proposal final di sini. -->
 
-## 10. Rencana Rilis
+## 11. Rencana Rilis
 <!-- Per fase dari plan: cakupan bullet + definition of done per fase. -->
 
-## 11. Risiko & Mitigasi
+## 12. Risiko & Mitigasi
 <!-- 3–5 risiko: risiko, dampak, mitigasi. -->
 
-## 12. Pertanyaan Terbuka
+## 13. Pertanyaan Terbuka
 <!-- Semua yang di-skip user atau diasumsikan. Format: pertanyaan — kenapa penting — default yang disarankan. -->

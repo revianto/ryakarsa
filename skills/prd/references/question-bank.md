@@ -17,7 +17,10 @@ Pick 5–8 questions per project from the core set; add type-specific ones only 
 6. **Success signal** (single choice or open) —
    "3 bulan setelah rilis, gimana kamu tahu ini berhasil?" options: jumlah X dibuat, dibagikan ke N orang, rating, revenue.
 7. **Constraints** (multi or open) — platform (web / Android / iOS / WhatsApp), deadline, siapa yang bangun (solo / tim / AI), budget hosting, integrasi wajib (payment, WhatsApp, Maps).
-8. **Tech stack** — "Udah punya pilihan tech stack, atau mau AI yang tentuin?"
+8. **Positioning & brand tone** (single choice + follow-up) — *hanya untuk produk consumer-facing / berbayar / punya marketing surface; SKIP untuk internal tool, API, atau script.* Mengisi section "Positioning & Brand Tone" di PRD, dan jadi dasar tingkat ornamen UI di skill `design-brief`.
+   "Produk ini diposisikan di kelas mana?" — a. Mass-market (terjangkau, dipakai banyak orang) b. Mid-market (seimbang) c. Premium/eksklusif (harga & kesan mewah jadi bagian nilainya).
+   Follow-up singkat: "Kesannya harus gimana — 2-3 kata?" (mis. tenang & terpercaya / hangat & personal / tegas & efisien), dan kalau ada: "Ada produk lain yang jadi pembanding, dan apa yang sengaja kamu bedakan darinya?"
+9. **Tech stack** — "Udah punya pilihan tech stack, atau mau AI yang tentuin?"
    a. Biarkan AI pilih (AI rekomendasikan yang paling cocok)
    b. Pilih sendiri → then per layer: Frontend (UI & tampilan user), Backend (logika & API server), Database (penyimpanan data), Deployment (hosting & infra).
 
