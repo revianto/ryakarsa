@@ -116,6 +116,23 @@ Form adalah salah satu elemen UI yang paling sering dibuat, tapi juga paling ser
 - **Gunakan atribut `autocomplete`** yang tepat (`name`, `email`, `tel`, `new-password`, dst.) agar browser/password manager bisa membantu isi otomatis.
 - **Toggle show/hide password** — jangan paksa user mengetik password tanpa bisa memverifikasi apa yang mereka ketik.
 
+### 6.1 Memilih Komponen Input yang Tepat
+
+Kesalahan umum: pakai dropdown untuk segalanya (butuh 2 klik/tap minimum, sembunyikan opsi dari pandangan) atau checkbox untuk aksi yang seharusnya instan (toggle). Pilih berdasar jumlah opsi, jenis pilihan (satu vs banyak), dan apakah efeknya instan atau perlu submit:
+
+| Situasi | Komponen | Kenapa |
+|---|---|---|
+| Pilih 1 dari 2-5 opsi, semua opsi penting dilihat sekaligus | **Radio button** | Semua opsi visible tanpa interaksi tambahan (0 klik untuk lihat, 1 klik untuk pilih) — lebih cepat di-scan daripada dropdown untuk opsi sedikit |
+| Pilih 1 dari 6+ opsi, atau ruang layar terbatas | **Dropdown/Select** | Opsi banyak akan memenuhi layar kalau dibuat radio semua — dropdown menyembunyikan opsi sampai dibutuhkan, trade-off-nya 1 klik ekstra untuk lihat opsi |
+| Pilih 1 dari banyak opsi (20+) yang user mungkin perlu cari | **Combobox/searchable select** | Dropdown biasa jadi tidak scannable kalau opsinya puluhan — searchable select biarkan user ketik untuk filter |
+| Pilih banyak (0 atau lebih) dari beberapa opsi terkait, submit bareng form | **Checkbox** | Checkbox menyiratkan "bagian dari form, efek baru terjadi saat submit" — konvensi yang sudah dikenal luas (Jakob) |
+| Satu aksi on/off yang **efeknya instan** (tanpa tombol submit) | **Toggle/Switch** | Toggle menyiratkan "berubah seketika saat disentuh" — beda kontrak dengan checkbox yang menunggu submit. Pakai toggle untuk pengaturan (mis. "notifikasi email: on/off"), bukan untuk field form yang di-submit |
+| Satu konfirmasi ya/tidak dalam form (mis. "Saya setuju dengan Syarat & Ketentuan") | **Checkbox tunggal**, bukan toggle | Konteksnya bagian dari submit form, bukan pengaturan instan |
+| Pilih 1 dari 2-4 opsi yang sering di-switch bolak-balik, semua harus selalu terlihat sejajar (mis. filter tab, view mode) | **Segmented control/button group** | Lebih cepat di-switch daripada dropdown (0 klik ekstra untuk buka), dan secara visual menunjukkan semua opsi + status aktif sekaligus |
+| Rentang nilai numerik dengan batas jelas (mis. harga, rating) | **Slider**, didampingi input angka untuk nilai presisi | Slider bagus untuk eksplorasi rentang cepat, tapi tanpa input angka pendamping user tidak bisa set nilai presisi (mis. "Rp 1.234.567" persis) |
+
+Prinsip umum di balik tabel ini: **makin sedikit opsi dan makin penting semua opsi terlihat sekaligus, makin condong ke komponen yang "selalu visible" (radio/segmented control/checkbox)**; makin banyak opsi atau makin terbatas ruang, makin condong ke komponen yang "disembunyikan sampai dibutuhkan" (dropdown/combobox). Toggle vs checkbox bukan soal jumlah opsi tapi soal **kontrak interaksi**: instan (toggle) vs menunggu submit (checkbox).
+
 ---
 
 ## 7. Responsive & Breakpoint
