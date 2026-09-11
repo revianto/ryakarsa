@@ -35,13 +35,30 @@ Sebelum masuk ke tahap filosofi, scan project (working directory saat ini) untuk
 
 **Kalau tidak ditemukan** → lanjut mode generate seperti biasa (tahap 2 di bawah).
 
+## 1b. Wawancara kebutuhan UI — wajib sebelum menulis filosofi
+
+Jangan langsung lanjut ke tahap 2 berdasarkan tebakan dari sinyal PRD saja. Tanyakan dulu lewat **AskUserQuestion** (fallback: daftar bernomor) — kategori produk yang beda butuh penekanan desain yang beda, jadi ini bukan basa-basi:
+
+1. **Prioritas UI produk ini** (skip pertanyaan ini kalau mode extract di 1a aktif — token existing sudah menjawabnya secara implisit):
+   - **Estetika & motion** — produk brand-forward/consumer (portfolio, landing kreatif, produk lifestyle/hobi) di mana dampak visual dan animasi adalah bagian dari value proposition-nya sendiri.
+   - **Layanan & kepercayaan** — produk B2B/fintech/kesehatan/jasa profesional di mana clarity, sinyal kredibilitas (testimoni, badge, angka konkret, proof), dan kemudahan mengambil keputusan lebih penting daripada motion — animasi jadi sekunder, bukan sorotan.
+   - **Utility & efisiensi** — dashboard/tool internal di mana kepadatan informasi dan kecepatan scan lebih penting dari dua kategori di atas.
+   - Kalau user tidak yakin, tawarkan tebakan dari sinyal tahap 1 (tujuan bisnis, audiens) dengan alasan konkret, tapi tetap minta konfirmasi eksplisit sebelum dipakai — jangan diam-diam dianggap disetujui.
+
+2. **Kebutuhan blok konten UI** — elemen apa saja yang perlu didesain treatment-nya: CTA, carousel/slider, testimonial, pricing table, FAQ accordion, stat/angka besar, dll. Kalau user tidak yakin, tawarkan opsi "Claude yang rekomendasikan dari fitur-fitur di PRD" — tapi tetap sebutkan daftar rekomendasinya secara eksplisit untuk dikonfirmasi user, jangan diam-diam menambah blok yang tidak pernah disebut atau disetujui.
+
+3. **Referensi/inspirasi visual yang sudah ada** — apakah user sudah punya arah visual (link produk, nama brand, screenshot) yang ingin dijadikan acuan? Kalau ada, tahap 4 (riset referensi) berubah fungsi dari "cari dari nol" jadi "validasi & elaborasi dari referensi yang diberikan itu" — jangan mengabaikannya dan menyodorkan pilihan sendiri yang tidak diminta. Kalau tidak ada, tahap 4 tetap jalan seperti biasa (riset dari nol berdasarkan mood yang ditentukan di tahap 2).
+
+Ketiga jawaban ini mengikat tahap 2-4 di bawah — jangan mulai menulis filosofi sebelum semuanya dikonfirmasi user.
+
 ## 2. Tentukan filosofi (bukan cuma pilihan)
 
-Untuk tiga elemen inti, tulis ALASAN dulu baru pilihan — filosofi, bukan daftar token kosong:
+Untuk tiga elemen inti, tulis ALASAN dulu baru pilihan — filosofi, bukan daftar token kosong. Jawaban prioritas UI dari tahap 1b (estetika & motion / layanan & kepercayaan / utility & efisiensi) menentukan bobot tiap elemen di bawah — sebutkan eksplisit di brief prioritas mana yang dipakai dan kenapa:
 
-- **Warna**: mood apa yang harus dibawa warna ini untuk mencapai tujuan bisnis (mis. "trust + calm" untuk fintech consumer, "urgency + energy" untuk flash-sale e-commerce)? Baru turunkan ke arah palet (warm/cool, saturated/muted, monokromatik/kontras tinggi) dan proporsi 60-30-10 (lihat `uiux-guide` untuk rasionya). Beri 1 palet konkret sebagai starting point (nama warna + peran, belum harus hex final) dengan alasan tiap pilihan diikat ke poin di tahap 1.
+- **Warna**: mood apa yang harus dibawa warna ini untuk mencapai tujuan bisnis (mis. "trust + calm" untuk fintech consumer, "urgency + energy" untuk flash-sale e-commerce)? Baru turunkan ke arah palet (warm/cool, saturated/muted, monokromatik/kontras tinggi) dan proporsi 60-30-10 (lihat `uiux-guide` untuk rasionya). Beri 1 palet konkret sebagai starting point (nama warna + peran, belum harus hex final) dengan alasan tiap pilihan diikat ke poin di tahap 1. Untuk prioritas "layanan & kepercayaan", condongkan ke palet lebih restrained/muted dengan warna aksen dipakai hemat untuk sinyal kepercayaan (bukan dekorasi); untuk "estetika & motion", palet boleh lebih berani/kontras tinggi karena warna ikut jadi bagian dari daya tarik.
 - **Tipografi**: apa yang dibutuhkan dari tipe huruf ini — keterbacaan tinggi untuk data-dense app? kepribadian kuat untuk brand-forward landing page? Tentukan arah (grotesque/humanist/serif/display) dulu, baru nama font kalau alasannya sudah jelas.
 - **Layout**: kepadatan informasi apa yang sesuai (dashboard padat vs marketing lapang), pola grid, dan ritme visual (whitespace generous vs compact) — diikat ke konteks pakai dari tahap 1 (mis. "dipakai sambil jalan → informasi utama harus scannable dalam <3 detik").
+- **Motion**: untuk "estetika & motion", tentukan juga arah motion di sini (entrance, scroll-reveal, hover feedback) sebagai bagian dari filosofi inti, bukan sekadar polesan di tahap 6. Untuk "layanan & kepercayaan" dan "utility & efisiensi", motion tetap boleh ada tapi fungsional saja (feedback state, bukan showcase) — sebutkan eksplisit supaya tahap 6 tidak generate animasi yang berlebihan untuk kategori ini.
 
 ## 3. Pecah brief sesuai kebutuhan UI
 
@@ -49,12 +66,15 @@ Jangan tulis satu brief seragam untuk seluruh produk. Setelah fondasi (warna/tip
 
 - Bagaimana fondasi diterapkan di sini secara spesifik (mis. dashboard: aksen warna hanya untuk status/alert, angka pakai tabular figures; landing page: aksen warna dipakai lebih bebas untuk CTA, ukuran display type lebih besar)
 - Kebutuhan yang unik untuk area ini yang tidak berlaku di area lain (mis. checkout butuh trust signal visual ekstra, onboarding butuh progress indicator)
+- Treatment spesifik untuk tiap blok konten yang dikonfirmasi di tahap 1b (CTA, carousel, testimonial, pricing table, dll) yang relevan di area ini — jelaskan posisi, gaya, dan alasan pakai fondasi tahap 2, bukan cuma menyebut nama bloknya.
 
 Area yang tidak relevan (mis. PRD tidak menyebut mobile app) di-skip, jangan dipaksakan.
 
 ## 4. Riset referensi UI nyata — bukan istilah kosong
 
-Sebelum finalisasi, cari referensi UI nyata yang cocok dengan mood dari tahap 2 lewat pencarian web:
+**Kalau user sudah kasih referensi/inspirasi di tahap 1b** — jangan cari dari nol. Buka/analisis referensi yang diberikan (link, screenshot, atau nama produk yang disebut) dan elaborasi: pola spesifik apa dari referensi itu yang relevan diambil, apakah cocok penuh atau perlu disesuaikan dengan mood tahap 2, dan validasi dengan 0-2 referensi tambahan kalau perlu pembanding — bukan mengabaikan referensi user dan menyodorkan riset independen.
+
+**Kalau user tidak punya referensi** — cari referensi UI nyata yang cocok dengan mood dari tahap 2 lewat pencarian web:
 
 - Cari yang **populer** (dipakai luas, dikenal), **stabil** (design system matang, bukan tren yang keburu basi), atau **terbaru** (tren desain yang sedang relevan dengan mood ini) — sebutkan mana dari tiga kategori ini tiap referensi masuk.
 - Prioritaskan design system/produk konkret yang bisa disebut namanya (mis. shadcn/ui, Radix, Material 3, Linear, Stripe Dashboard, Untitled UI) dibanding istilah genre kosong ("modern minimalist").
