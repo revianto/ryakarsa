@@ -105,7 +105,20 @@ Estimate: 3 SP · Depends on: T1.2.2
 - [ ] Error handling: endpoint gagal saat submit → UI tampilkan error, data form tidak hilang
 ```
 
-Close with a summary in ≤6 lines: file path, task count per phase, test-case count per phase (if generated), any `⚠ butuh acceptance criteria` / `(perlu konfirmasi perilaku)` / `⚠ tidak ada lagi di PRD` flags and how many, how many `[x]` were carried forward from an existing TASKS.md, and the critical-path dependency chain if one stands out.
+## Step 6 — Pasang guard sinkronisasi di CLAUDE.md
+
+Backlog ini akan basi begitu ada fitur yang berubah/ditambah di tengah development, dan skill ini **tidak akan tahu** karena skill cuma aktif saat dipanggil. Satu-satunya tempat yang selalu terbaca di setiap sesi adalah `CLAUDE.md` project — jadi guard-nya ditaruh di situ, bukan di skill ini.
+
+Setelah `TASKS.md` ditulis:
+
+1. **Cek `./CLAUDE.md`** (atau `AGENTS.md` kalau itu yang dipakai project ini). Kalau sudah ada aturan sinkronisasi dokumen yang setara — cari sinyal seperti "sync", "drift", "PRD.md" bersanding dengan "TASKS.md" — **jangan tambahkan apa-apa**, cukup sebutkan di ringkasan bahwa guard-nya sudah ada.
+2. **Kalau `CLAUDE.md` ada tapi belum punya aturan itu** → tambahkan blok singkat di bawah ini (bahasa mengikuti dokumen itu), sisipkan dekat bagian aturan/konvensi kalau ada, jangan di tengah dokumentasi teknis yang tidak berhubungan:
+
+   > **Sinkronisasi PRD.md ↔ TASKS.md.** Kalau sebuah fitur berubah, ditambah, atau dibatalkan saat development — perbarui `PRD.md` dulu (acceptance criteria-nya juga), baru jalankan ulang skill `prd-to-tasks`. Skill itu melakukan merge, bukan overwrite: `[x]` yang sudah selesai dipertahankan, task yang kriterianya berubah di-reset (karena yang diverifikasi jadi beda), dan task yang sudah tidak ada di PRD ditandai `⚠` bukan dihapus diam-diam. Jangan mengedit `TASKS.md` manual untuk perubahan scope — itu bikin PRD dan backlog bercerita beda, dan test case-nya ikut basi.
+
+3. **Kalau `CLAUDE.md` belum ada sama sekali** → jangan buat file baru tanpa diminta (file itu memengaruhi semua sesi berikutnya di project ini). Sebutkan di ringkasan penutup bahwa guard belum terpasang dan tawarkan untuk membuatkannya.
+
+Close with a summary in ≤7 lines: file path, task count per phase, test-case count per phase (if generated), any `⚠ butuh acceptance criteria` / `(perlu konfirmasi perilaku)` / `⚠ tidak ada lagi di PRD` flags and how many, how many `[x]` were carried forward from an existing TASKS.md, the critical-path dependency chain if one stands out, and status guard `CLAUDE.md` dari Step 6 (sudah ada / ditambahkan / belum ada file-nya).
 
 ## Handoff
 
