@@ -35,7 +35,14 @@ Sebelum masuk ke tahap filosofi, scan project (working directory saat ini) untuk
 
 **Kalau tidak ditemukan** → lanjut mode generate seperti biasa (tahap 2 di bawah).
 
-## 1b. Wawancara kebutuhan UI — wajib sebelum menulis filosofi
+## 1b. Cek aset brand yang sudah ada
+
+Terpisah dari 1a (token kode) — cek apakah ada aset brand resmi yang harus jadi **constraint keras**, bukan diusulkan ulang seolah masih terbuka: logo (`logo.*`, `*.svg`/`*.ai` di folder `brand/`, `assets/brand/`, `public/brand/`), brand guideline (`*brand-guideline*`, `*brand-book*`, PDF/Figma link yang disebut di PRD atau README).
+
+- **Kalau ditemukan** (file lokal atau disebutkan user) → warna/font/logo dari situ jadi fondasi wajib di tahap 2, bukan pilihan filosofi dari nol. Filosofi tetap ditulis (kenapa aset ini cocok dengan tujuan bisnis tahap 1), tapi nilainya mengikuti aset, bukan sebaliknya.
+- **Kalau tidak ditemukan lewat scan** → tanyakan langsung ke user di tahap 1c di bawah (jangan diam-diam asumsi belum ada, brand guideline sering hidup di luar repo — Figma, Google Drive, dsb).
+
+## 1c. Wawancara kebutuhan UI — wajib sebelum menulis filosofi
 
 Jangan langsung lanjut ke tahap 2 berdasarkan tebakan dari sinyal PRD saja. Tanyakan dulu lewat **AskUserQuestion** (fallback: daftar bernomor) — kategori produk yang beda butuh penekanan desain yang beda, jadi ini bukan basa-basi:
 
@@ -55,16 +62,22 @@ Jangan langsung lanjut ke tahap 2 berdasarkan tebakan dari sinyal PRD saja. Tany
 
 4. **Referensi/inspirasi visual yang sudah ada** — apakah user sudah punya arah visual (link produk, nama brand, screenshot) yang ingin dijadikan acuan? Kalau ada, tahap 4 (riset referensi) berubah fungsi dari "cari dari nol" jadi "validasi & elaborasi dari referensi yang diberikan itu" — jangan mengabaikannya dan menyodorkan pilihan sendiri yang tidak diminta. Kalau tidak ada, tahap 4 tetap jalan seperti biasa (riset dari nol berdasarkan mood yang ditentukan di tahap 2).
 
-Keempat jawaban ini mengikat tahap 2-4 di bawah — jangan mulai menulis filosofi sebelum semuanya dikonfirmasi user.
+5. **Target dark mode** — tanyakan eksplisit, jangan diasumsikan dari kategori produk. Opsi:
+   - **Ya, sejak awal** — palet warna di tahap 2 WAJIB ditulis sebagai pasangan light/dark per peran warna (background, foreground, accent, dst.), bukan cuma light lalu dark ditambah belakangan — ini mengubah cara token ditulis sejak awal (semantic naming yang tahan banting, bukan hex tunggal).
+   - **Tidak** — produk sengaja satu visual world (lihat contoh `undangoo-landing` yang sengaja light-only dengan satu spread gelap sebagai bagian dari identitas, bukan mode terpisah) — boleh pakai warna literal tanpa pasangan dark, tandai eksplisit di brief bahwa ini keputusan sadar.
+   - **Nanti/belum tahu** — desain light dulu, tapi tetap strukturkan token dengan semantic naming (bukan nama warna mentah) supaya varian dark gampang ditambah belakangan tanpa rombak total.
+   - Jawaban ini menentukan struktur token warna di tahap 2 dan format `tokens.json` kalau nanti didaftarkan ke `design-tokens` (lihat tahap 7).
+
+Kelima jawaban ini mengikat tahap 2-4 di bawah — jangan mulai menulis filosofi sebelum semuanya dikonfirmasi user.
 
 ## 2. Tentukan filosofi (bukan cuma pilihan)
 
-Untuk tiga elemen inti, tulis ALASAN dulu baru pilihan — filosofi, bukan daftar token kosong. Jawaban prioritas UI dari tahap 1b (estetika & motion / layanan & kepercayaan / utility & efisiensi) menentukan bobot tiap elemen di bawah — sebutkan eksplisit di brief prioritas mana yang dipakai dan kenapa:
+Untuk tiga elemen inti, tulis ALASAN dulu baru pilihan — filosofi, bukan daftar token kosong. Jawaban prioritas UI dari tahap 1c (estetika & motion / layanan & kepercayaan / utility & efisiensi) menentukan bobot tiap elemen di bawah — sebutkan eksplisit di brief prioritas mana yang dipakai dan kenapa:
 
 - **Warna**: mood apa yang harus dibawa warna ini untuk mencapai tujuan bisnis (mis. "trust + calm" untuk fintech consumer, "urgency + energy" untuk flash-sale e-commerce)? Baru turunkan ke arah palet (warm/cool, saturated/muted, monokromatik/kontras tinggi) dan proporsi 60-30-10 (lihat `uiux-guide` untuk rasionya). Beri 1 palet konkret sebagai starting point (nama warna + peran, belum harus hex final) dengan alasan tiap pilihan diikat ke poin di tahap 1. Untuk prioritas "layanan & kepercayaan", condongkan ke palet lebih restrained/muted dengan warna aksen dipakai hemat untuk sinyal kepercayaan (bukan dekorasi); untuk "estetika & motion", palet boleh lebih berani/kontras tinggi karena warna ikut jadi bagian dari daya tarik.
 - **Tipografi**: apa yang dibutuhkan dari tipe huruf ini — keterbacaan tinggi untuk data-dense app? kepribadian kuat untuk brand-forward landing page? Tentukan arah (grotesque/humanist/serif/display) dulu, baru nama font kalau alasannya sudah jelas.
 - **Layout**: kepadatan informasi apa yang sesuai (dashboard padat vs marketing lapang), pola grid, dan ritme visual (whitespace generous vs compact) — diikat ke konteks pakai dari tahap 1 (mis. "dipakai sambil jalan → informasi utama harus scannable dalam <3 detik").
-- **Motion**: turunkan langsung dari level animasi yang dikonfirmasi di tahap 1b (Minimal/Sedang/Kaya), jangan tentukan ulang dari nol di sini. Untuk "Kaya", jabarkan arah motion konkret (entrance sequence, scroll-driven section mana yang jadi showcase, ambient motion) sebagai bagian dari filosofi inti, bukan sekadar polesan di tahap 6. Untuk "Sedang", cukup sebutkan pola umum (scroll-reveal halus, hover feedback). Untuk "Minimal", sebutkan eksplisit bahwa motion dibatasi ke feedback state saja — supaya tahap 6 tidak generate animasi dekoratif yang tidak diminta.
+- **Motion**: turunkan langsung dari level animasi yang dikonfirmasi di tahap 1c (Minimal/Sedang/Kaya), jangan tentukan ulang dari nol di sini. Untuk "Kaya", jabarkan arah motion konkret (entrance sequence, scroll-driven section mana yang jadi showcase, ambient motion) sebagai bagian dari filosofi inti, bukan sekadar polesan di tahap 6. Untuk "Sedang", cukup sebutkan pola umum (scroll-reveal halus, hover feedback). Untuk "Minimal", sebutkan eksplisit bahwa motion dibatasi ke feedback state saja — supaya tahap 6 tidak generate animasi dekoratif yang tidak diminta.
 
 ## 3. Pecah brief sesuai kebutuhan UI
 
@@ -72,13 +85,13 @@ Jangan tulis satu brief seragam untuk seluruh produk. Setelah fondasi (warna/tip
 
 - Bagaimana fondasi diterapkan di sini secara spesifik (mis. dashboard: aksen warna hanya untuk status/alert, angka pakai tabular figures; landing page: aksen warna dipakai lebih bebas untuk CTA, ukuran display type lebih besar)
 - Kebutuhan yang unik untuk area ini yang tidak berlaku di area lain (mis. checkout butuh trust signal visual ekstra, onboarding butuh progress indicator)
-- Treatment spesifik untuk tiap blok konten yang dikonfirmasi di tahap 1b (CTA, carousel, testimonial, pricing table, dll) yang relevan di area ini — jelaskan posisi, gaya, dan alasan pakai fondasi tahap 2, bukan cuma menyebut nama bloknya.
+- Treatment spesifik untuk tiap blok konten yang dikonfirmasi di tahap 1c (CTA, carousel, testimonial, pricing table, dll) yang relevan di area ini — jelaskan posisi, gaya, dan alasan pakai fondasi tahap 2, bukan cuma menyebut nama bloknya.
 
 Area yang tidak relevan (mis. PRD tidak menyebut mobile app) di-skip, jangan dipaksakan.
 
 ## 4. Riset referensi UI nyata — bukan istilah kosong
 
-**Kalau user sudah kasih referensi/inspirasi di tahap 1b** — jangan cari dari nol. Buka/analisis referensi yang diberikan (link, screenshot, atau nama produk yang disebut) dan elaborasi: pola spesifik apa dari referensi itu yang relevan diambil, apakah cocok penuh atau perlu disesuaikan dengan mood tahap 2, dan validasi dengan 0-2 referensi tambahan kalau perlu pembanding — bukan mengabaikan referensi user dan menyodorkan riset independen.
+**Kalau user sudah kasih referensi/inspirasi di tahap 1c** — jangan cari dari nol. Buka/analisis referensi yang diberikan (link, screenshot, atau nama produk yang disebut) dan elaborasi: pola spesifik apa dari referensi itu yang relevan diambil, apakah cocok penuh atau perlu disesuaikan dengan mood tahap 2, dan validasi dengan 0-2 referensi tambahan kalau perlu pembanding — bukan mengabaikan referensi user dan menyodorkan riset independen.
 
 **Kalau user tidak punya referensi** — cari referensi UI nyata yang cocok dengan mood dari tahap 2 lewat pencarian web:
 
@@ -107,7 +120,7 @@ Setelah `DESIGN-BRIEF.md` tersimpan, lanjutkan otomatis — jangan berhenti dan 
 **Kecuali mode extract (tahap 1a) dan FE existing sudah punya komponen button/card/nav yang jalan** — skip starter kit ini sepenuhnya (jangan generate ulang yang sudah ada), sebutkan di ringkasan penutup bahwa starter kit dilewati karena komponen setara sudah ada di FE existing. Kalau mode extract tapi FE existing belum punya salah satu dari ketiga komponen itu, tetap generate yang hilang saja (bukan ketiganya).
 
 - **3 komponen** lewat `component-library` (alur "tambah dari deskripsi teks"): primary button, card dasar, nav/header. Deskripsi yang dikirim ke skill itu HARUS mengutip filosofi warna/tipografi/layout dari brief ini (mis. "button primer, warna aksen [X] dari brief, radius sesuai arah layout [Y]"), bukan deskripsi generik.
-- **2 animasi** lewat `animation-library`, disesuaikan level animasi dari tahap 1b: satu entrance/fade yang cocok dengan ritme visual brief (whitespace generous → transisi lebih lambat/lembut; compact/dashboard → cepat/snappy), satu hover/interaction feedback yang cocok dengan tone (playful → bounce halus; professional/trust → fade/scale halus). Untuk level **Minimal**, kedua entry ini tetap dibuat tapi versi paling ringan/singkat (feedback state saja, bukan showcase). Untuk level **Kaya**, sebutkan di ringkasan penutup bahwa starter kit 2 animasi ini cuma basic default — motion showcase sesungguhnya (scroll-driven sequence, orchestrated entrance) perlu dibangun manual lewat `animation-library`/kode langsung saat user memang memintanya, bukan otomatis dari sini.
+- **2 animasi** lewat `animation-library`, disesuaikan level animasi dari tahap 1c: satu entrance/fade yang cocok dengan ritme visual brief (whitespace generous → transisi lebih lambat/lembut; compact/dashboard → cepat/snappy), satu hover/interaction feedback yang cocok dengan tone (playful → bounce halus; professional/trust → fade/scale halus). Untuk level **Minimal**, kedua entry ini tetap dibuat tapi versi paling ringan/singkat (feedback state saja, bukan showcase). Untuk level **Kaya**, sebutkan di ringkasan penutup bahwa starter kit 2 animasi ini cuma basic default — motion showcase sesungguhnya (scroll-driven sequence, orchestrated entrance) perlu dibangun manual lewat `animation-library`/kode langsung saat user memang memintanya, bukan otomatis dari sini.
 - **Penamaan**: prefix nama produk dari PRD ke setiap nama entry (mis. `acme-btn-primary`, bukan `btn-primary`) supaya tidak bentrok atau ketiban entry dari brief produk lain.
 - **Source**: tandai `prompt` seperti alur normal kedua skill itu.
 - **Fallback**: kalau `component-library` atau `animation-library` tidak terpasang di environment ini, skip bagian itu saja secara diam-diam (jangan gagalkan design-brief), dan sebutkan di ringkasan penutup bahwa bagian itu dilewati.
@@ -119,12 +132,21 @@ Setelah `DESIGN-BRIEF.md` tersimpan, lanjutkan otomatis — jangan berhenti dan 
 
 Kalau dua syarat itu terpenuhi: sebut di brief (bagian riset referensi atau starter kit) rekomendasi komponen React Bits (reactbits.dev) yang cocok dengan mood — mis. background animasi untuk hero, fade-on-scroll untuk section reveal — sebagai alternatif ke entry `animation-library` buatan tangan untuk kebutuhan itu spesifik. **Jangan auto-install** — ini cuma rekomendasi tertulis; pemasangan registry `@react-bits` ke `components.json` project (lihat memory `reference-react-bits-mcp`) tetap harus dikonfirmasi user dulu karena mengubah config project. Kalau salah satu syarat tidak terpenuhi, jangan sebut React Bits sama sekali — jangan dipaksakan.
 
-Tutup dengan ringkasan ≤8 baris: path file brief, filosofi inti (1 kalimat warna+tipografi+layout), berapa area UI yang di-cover, berapa referensi riset dipakai, berapa item "(perlu konfirmasi)" yang tersisa, daftar nama komponen/animasi yang berhasil dibuat (atau catatan kalau di-skip), dan kalau relevan — rekomendasi React Bits yang disebutkan.
+## 7. Daftarkan ke `design-tokens` (kalau skill itu terpasang)
+
+Setelah tahap 6 selesai, lanjutkan otomatis (sama seperti tahap 6, jangan berhenti menunggu diminta terpisah) — **kecuali** skill `design-tokens` tidak terpasang di environment ini, atau mode extract (tahap 1a) aktif dan design system yang sesuai sudah terdaftar di library-nya (cek dulu lewat `list`/`get` sebelum menambah — jangan duplikat).
+
+1. Turunkan `tokens.json` langsung dari filosofi tahap 2 — bukan menulis ulang dari nol: warna (primitive+semantic, ikuti keputusan dark-mode dari tahap 1c — pasangan light/dark per peran kalau user pilih "Ya"/"Nanti", literal tunggal kalau pilih "Tidak" dan ditandai sebagai keputusan sadar seperti contoh `undangoo-landing`), tipografi (fontFamily/scale/weight dari tahap 2), spacing/radius/shadow/breakpoint/motion kalau brief menyebutkannya secara spesifik (jangan mengarang angka yang tidak ada di brief — kosongkan kategori itu kalau memang belum diputuskan, ikuti pola `spacingUsage`/`breakpointUsage` notes-only di skill `design-tokens` untuk kategori yang belum ada nilainya).
+2. Daftarkan lewat `manage_library.py add --name <nama-produk-dari-PRD> --description "..." --source prompt` (skill `design-brief` yang jadi sumbernya, jadi `prompt` bukan `code`/`design`), lalu isi `tokens.json` hasil turunan itu.
+3. Kalau user punya viewer design system yang sudah dipublish sebelumnya (mis. artifact seperti System Shelf) — ikuti alur "jaga viewer tetap sinkron" yang sudah ada di `SKILL.md` skill `design-tokens` (alur #7 di skill itu): update data grup dan republish ke URL yang sama. Kalau belum ada viewer sama sekali, jangan bikin baru inisiatif sendiri di sini — cukup sebutkan di ringkasan penutup bahwa design system sudah terdaftar di library dan viewer bisa dibuat kalau diminta.
+4. **Fallback**: kalau `design-tokens` tidak terpasang, skip tahap ini secara diam-diam (jangan gagalkan design-brief), sebutkan di ringkasan penutup bahwa bagian ini dilewati.
+
+Tutup dengan ringkasan ≤9 baris: path file brief, filosofi inti (1 kalimat warna+tipografi+layout), berapa area UI yang di-cover, berapa referensi riset dipakai, berapa item "(perlu konfirmasi)" yang tersisa, daftar nama komponen/animasi yang berhasil dibuat (atau catatan kalau di-skip), kalau relevan — rekomendasi React Bits yang disebutkan, dan status pendaftaran ke `design-tokens` (nama design system yang terdaftar, atau catatan kalau dilewati).
 
 ## Handoff
 
 - Belum ada PRD: `prd` untuk bikin dari ide mentah, `prd-refine` untuk merapikan yang sudah ada.
-- Setelah design brief ini ada, `component-library` & `animation-library` otomatis terpicu untuk starter kit dasar (lihat tahap 6) — tidak perlu diminta terpisah.
+- Setelah design brief ini ada, `component-library` & `animation-library` otomatis terpicu untuk starter kit dasar (lihat tahap 6) — tidak perlu diminta terpisah. `design-tokens` juga otomatis terpicu (lihat tahap 7) untuk mendaftarkan design system-nya supaya bisa dipakai ulang di project lain.
 - Penerapan lanjutan ke UI nyata (komponen lain, halaman penuh) pakai `uiux-guide` Design mode — brief ini kasih arah visual, `uiux-guide` kasih aturan teknis penerapannya (kontras, grid, tap target, dst.).
 - Butuh dokumen behavior/interaction standard tanpa identitas visual (bukan ini): `uiux-guide` Standards mode.
 - Butuh breakdown task/test-case dari PRD, bukan desain: `prd-to-tasks`.
