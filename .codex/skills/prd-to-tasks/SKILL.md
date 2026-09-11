@@ -22,6 +22,7 @@ Ask (via **AskUserQuestion** when available, else a numbered list) only what cha
 - Estimate unit — story points, hours/days, or T-shirt size (S/M/L).
 - Solo builder or a team with roles (frontend/backend/design/QA) — this decides whether tasks get a role label.
 - **Include test-case checklist?** — default yes; skip only if the user explicitly just wants tasks.
+- **Ordering strategy** — default **dependency-based** (data model → backend/API → UI, so a task never sits ahead of what it needs to exist first). Offer **frontend-first** as an alternative only if the user asks for it or the PRD/context signals FE will be built against mocks/stubs (design/UX sign-off before backend investment, prototype-first workflow). Don't ask this question when dependency-based is obviously fine (most PRDs) — only surface it if the user's phrasing hints at wanting FE done first.
 
 Skip anything already obvious from the PRD (e.g. if it names a solo AI-assisted build, don't ask about team roles).
 
@@ -54,7 +55,9 @@ A feature with no acceptance criteria gets no test cases either — it inherits 
 
 ## Step 4 — Sequence
 
-Within each phase, order tasks so dependencies come first. Call out cross-feature dependencies explicitly (e.g. "T1.2.1 butuh T1.1.3 selesai dulu karena share data model") — don't bury them inside individual tasks.
+**Dependency-based (default):** within each phase, order tasks so dependencies come first — data model → backend/API → UI/integration, per feature. Call out cross-feature dependencies explicitly (e.g. "T1.2.1 butuh T1.1.3 selesai dulu karena share data model") — don't bury them inside individual tasks.
+
+**Frontend-first (opt-in, from Step 1):** within each phase, list every feature's FE/UI tasks first (built against mocked/stubbed data — say so explicitly in the task, e.g. "UI daftar tamu (pakai data dummy, belum terhubung API)"), then every feature's BE/API tasks, then a final small "Hubungkan FE ke API asli" task per feature that depends on both its own FE task and its own BE task. Still respect same-layer dependencies (e.g. a BE endpoint task that needs a DB schema task from the same or an earlier feature still comes after it). Note in the phase's opening line that this run uses frontend-first ordering, so it's clear on re-read why BE comes second.
 
 Phase boundaries from the PRD are fixed: never pull a later-phase task earlier or vice versa just because it'd resequence nicely.
 
