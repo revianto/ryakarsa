@@ -38,6 +38,9 @@ Then ask the questions using the **AskUserQuestion tool** when it is available i
 - **Multi-select** for must-have features: set `multiSelect: true` and state the cap inside the question ("pilih maks 3") to force prioritization.
 - **Open-text questions** (problem discovery) still work: give likely answers as options; the user can pick "Other" to type freely.
 - **Skipping is fine**: nothing breaks if a question is skipped — whatever is unanswered becomes an Open Question later.
+- **Recommend, don't just list**: for every question where the conversation/existing docs already lean toward an answer, order that option first and suffix its label "(Recommended)" per the tool's own convention. A question with no lean yet (genuine open fork) gets no recommendation — don't force one.
+
+Wave order follows dependency, not just topic grouping: a later wave's default recommendation may lean on an earlier wave's answer (e.g. the feature-priority wave's recommended picks shift once the audience question is answered) — don't pre-decide those defaults before the answer they depend on is in.
 
 Wave shape (example, Indonesian — wave 1 of 2):
 

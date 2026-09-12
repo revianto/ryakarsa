@@ -46,7 +46,9 @@ Terpisah dari 1a (token kode) — cek apakah ada aset brand resmi yang harus jad
 
 ## 1c. Wawancara kebutuhan UI — wajib sebelum menulis filosofi
 
-Jangan langsung lanjut ke tahap 2 berdasarkan tebakan dari sinyal PRD saja. Tanyakan dulu lewat **AskUserQuestion** (fallback: daftar bernomor) — kategori produk yang beda butuh penekanan desain yang beda, jadi ini bukan basa-basi:
+Jangan langsung lanjut ke tahap 2 berdasarkan tebakan dari sinyal PRD saja. Tanyakan dulu lewat **AskUserQuestion** (fallback: daftar bernomor) — kategori produk yang beda butuh penekanan desain yang beda, jadi ini bukan basa-basi.
+
+**Rekomendasi per pertanyaan**: tiap pertanyaan di bawah yang sudah punya sinyal dari tahap 1/1a/1b (tujuan bisnis, positioning, token/aset existing) taruh opsi itu di urutan pertama dengan suffix "(Recommended)" — jangan biarkan user memilih dari daftar kosong tanpa arah kalau sinyalnya sudah ada. Pertanyaan yang sinyalnya genuinely kosong (mis. level animasi kalau PRD tidak menyinggung motion sama sekali) tidak perlu dipaksakan rekomendasi.
 
 1. **Prioritas UI produk ini** (skip pertanyaan ini kalau mode extract di 1a aktif — token existing sudah menjawabnya secara implisit):
    - **Estetika & motion** — produk brand-forward/consumer (portfolio, landing kreatif, produk lifestyle/hobi) di mana dampak visual dan animasi adalah bagian dari value proposition-nya sendiri.
